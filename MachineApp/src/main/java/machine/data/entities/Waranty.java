@@ -18,6 +18,7 @@ public class Waranty {
 	private Date orderDate;
 	@Column(name = "is_active")
 	private boolean isActive = true;
+	
 	/**
 	 * @return the id
 	 */

@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import machine.data.entities.machines.Machine;
+
 @Entity
 @Table(name = "service_orders")
 public class ServiceOrder {
@@ -13,11 +15,14 @@ public class ServiceOrder {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToOne
-	@JoinColumn(name = "compressor_id", referencedColumnName = "id")
-	private Machine compressor;
+	@ManyToOne
+	@JoinColumn(name = "machine_id", referencedColumnName = "id")
+	private Machine machine;
 	
-	@OneToMany
+	@ManyToOne
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private User user;
+	@ManyToMany
 	@JoinTable(name = "service_order_accessories")
 	
 	List<Accessory> accsesories =new ArrayList<Accessory>();
@@ -37,20 +42,6 @@ public class ServiceOrder {
 	}
 
 	/**
-	 * @return the compressor
-	 */
-	public Machine getCompressor() {
-		return compressor;
-	}
-
-	/**
-	 * @param compressor the compressor to set
-	 */
-	public void setCompressor(Machine compressor) {
-		this.compressor = compressor;
-	}
-
-	/**
 	 * @return the accsesories
 	 */
 	public List<Accessory> getAccsesories() {
@@ -63,7 +54,21 @@ public class ServiceOrder {
 	public void setAccsesories(List<Accessory> accsesories) {
 		this.accsesories = accsesories;
 	}
-	
-	
+
+	public Machine getMachine() {
+		return machine;
+	}
+
+	public void setMachine(Machine machine) {
+		this.machine = machine;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 	
 }
