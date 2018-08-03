@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/headFragment :: head">
+
+</head>
+<body>
+	<header th:replace="fragments/navBarFragment :: header"></header>
+	<div class="container">
+		<h1>Add new machine</h1>
+		<table>
+			<tr>
+				<td >Machine:</td>
+		    </tr>
+		    <tr th:each="type : ${machineTypes}">
+		    	<td ><a th:href="@{add/} +${type}" class="btn btn-primary btn-md btn-block" th:text="${type}">add</a></td>
+		    </tr>
+		</table>
+		<div >
+		<a ></a>
+		</div>
+	</div>	
+</body>
+</html>
+
+
+

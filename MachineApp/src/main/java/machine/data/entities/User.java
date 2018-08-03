@@ -1,5 +1,7 @@
 package machine.data.entities;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,6 +14,10 @@ public class User {
 	private String username;
 	@Basic
 	private String password;
+	
+	@OneToMany(mappedBy= "user")
+	private List<ServiceOrder> userOrders;
+	
 	public Long getId() {
 		return id;
 	}
@@ -29,6 +35,12 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public List<ServiceOrder> getUserOrders() {
+		return userOrders;
+	}
+	public void setUserOrders(List<ServiceOrder> userOrders) {
+		this.userOrders = userOrders;
 	}
 	
 	

@@ -1,13 +1,11 @@
 package machine.data.entities.machines.dryers;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import machine.data.entities.machines.Machine;
-import machine.data.enums.DryerType;
 
 @MappedSuperclass
 public class Dryer extends Machine {

@@ -8,13 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
-import machine.data.entities.Waranty;
 import machine.data.enums.MachineType;
 
 @Entity
@@ -41,14 +37,12 @@ public class Machine {
 	protected String dimension;
 	@Basic
 	@NotNull
-	protected Double weigth;
-	@OneToOne
-	@JoinColumn(name = "waranty_id", referencedColumnName = "id")
-	protected Waranty waranty;
-	
+	protected Double weigth;	
 	@Column(name="machine_type")
 	@NotNull
 	protected MachineType machineType;
+	@Basic
+	protected byte[] image;
 	/**
 	 * @return the id
 	 */
@@ -109,18 +103,6 @@ public class Machine {
 	public void setWeigth(Double weigth) {
 		this.weigth = weigth;
 	}
-	/**
-	 * @return the waranty
-	 */
-	public Waranty getWaranty() {
-		return waranty;
-	}
-	/**
-	 * @param waranty the waranty to set
-	 */
-	public void setWaranty(Waranty waranty) {
-		this.waranty = waranty;
-	}
 	public Double getPowerConsumption() {
 		return powerConsumption;
 	}
@@ -133,10 +115,16 @@ public class Machine {
 	public void setMachineType(MachineType machineType) {
 		this.machineType = machineType;
 	}
-	
-	
-	
-	
-	
-	
+	public String getMachineIdentifier() {
+		return machineIdentifier;
+	}
+	public void setMachineIdentifier(String machineIdentifier) {
+		this.machineIdentifier = machineIdentifier;
+	}
+	public byte[] getImage() {
+		return image;
+	}
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
 }

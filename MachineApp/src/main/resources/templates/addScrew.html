@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/headFragment :: head">
+
+</head>
+<body>
+	<header th:replace="fragments/navBarFragment :: header"></header>
+	<div class="container">
+		<h1>Add Screw compressor</h1>
+		<form action="#" th:action="@{/machines/add/SCREW_COMPRESSOR}" th:object="${machine}" method="post">
+	    	<input   type="text" th:field="*{id}" th:readonly="true" hidden="true"/>
+	    	<input   type="text" th:field="*{machineType}" th:readonly="true" hidden="true"/>
+	    	<input   type="text" th:field="*{machineIdentifier}" th:readonly="true" hidden="true"/>
+	    	<div class="form-group">
+	    		<label for="modelInput">Model:</label>
+	    	 	<input  type="text" th:field="*{model}" id="modelInput" class="form-control"/>
+	    	 	<p th:each="err : ${#fields.errors('model')}" th:text="${err}" /></p>
+	    	</div> 
+	        
+	        <div class="form-group">
+	    		<label for="powerInput">Power:</label>
+	    	 	<input  type="text" th:field="*{power}" id="powerInput" class="form-control"/>
+	    	 	<p th:each="err : ${#fields.errors('power')}" th:text="${err}" /></p>
+	    	</div> 
+	    	
+	    	<div class="form-group">
+	    		<label for="consumptionInput">Energy consumption:</label>
+	    	 	<input  type="text" th:field="*{powerConsumption}" id="consumptionInput" class="form-control"/>
+	    	 	<p th:each="err : ${#fields.errors('powerConsumption')}" th:text="${err}" /></p>
+	    	</div> 
+	    	
+	    	<div class="form-group">
+	    		<label for="dimensionsInput">Dimensions:</label>
+	    	 	<input  type="text" th:field="*{dimension}" id="consumptionInput" class="form-control"/>
+	    	 	<p th:each="err : ${#fields.errors('dimension')}" th:text="${err}" /></p>
+	    	</div> 
+	    	
+	    	<div class="form-group">
+	    		<label for="weigthInput">Weigth:</label>
+	    	 	<input  type="text" th:field="*{weigth}" id="weigthInput" class="form-control"/>
+	    	 	<p th:each="err : ${#fields.errors('weigth')}" th:text="${err}" /></p>
+	    	</div>  
+	 
+	 		<div class="form-group">
+	    		<label for="volumeAt8Input">Volume at 8 bar:</label>
+	    	 	<input  type="text" th:field="*{volumeAt8Bars}" id="volumeAt8Input" class="form-control"/>
+	    	 	<p th:each="err : ${#fields.errors('volumeAt8Bars')}" th:text="${err}" /></p>
+	    	</div> 
+	        
+	        <div class="form-group">
+	    		<label for="volumeAt8Input">Volume at 10 bar:</label>
+	    	 	<input  type="text" th:field="*{volumeAt10Bars}" id="volumeAt10Input" class="form-control"/>
+	    	 	<p th:each="err : ${#fields.errors('volumeAt10Bars')}" th:text="${err}" /></p>
+	    	</div> 
+	    	
+	    	<div class="form-group">
+	    		<label for="volumeAt13Input">Volume at 13 bar:</label>
+	    	 	<input  type="text" th:field="*{volumeAt13Bars}" id="volumeAt13Input" class="form-control"/>
+	    	 	<p th:each="err : ${#fields.errors('volumeAt13Bars')}" th:text="${err}" /></p>
+	    	</div>  	
+		<p><input type="submit" value="Submit" class="btn btn-primary mb-2" /> <input type="reset" value="Reset" class="btn btn-primary mb-2"/></p>
+	</form>
+	</div>	
+</body>
+</html>

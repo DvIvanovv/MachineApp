@@ -1,11 +1,10 @@
 package machine.data.entities;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
-
-import machine.data.entities.machines.Machine;
 
 @Entity
 @Table(name = "service_orders")
@@ -16,17 +15,17 @@ public class ServiceOrder {
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "machine_id", referencedColumnName = "id")
-	private Machine machine;
+	@JoinColumn(name = "machinearanty_id", referencedColumnName = "id")
+	private Waranty waranty;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
 	@ManyToMany
 	@JoinTable(name = "service_order_accessories")
-	
 	List<Accessory> accsesories =new ArrayList<Accessory>();
-
+	@Column(name = "service_date")
+	private Date serviceDate;
 	/**
 	 * @return the id
 	 */
@@ -47,7 +46,6 @@ public class ServiceOrder {
 	public List<Accessory> getAccsesories() {
 		return accsesories;
 	}
-
 	/**
 	 * @param accsesories the accsesories to set
 	 */
@@ -55,13 +53,16 @@ public class ServiceOrder {
 		this.accsesories = accsesories;
 	}
 
-	public Machine getMachine() {
-		return machine;
+	
+
+	public Waranty getWaranty() {
+		return waranty;
 	}
 
-	public void setMachine(Machine machine) {
-		this.machine = machine;
+	public void setWaranty(Waranty waranty) {
+		this.waranty = waranty;
 	}
+
 
 	public User getUser() {
 		return user;
@@ -70,5 +71,14 @@ public class ServiceOrder {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public Date getServiceDate() {
+		return serviceDate;
+	}
+
+	public void setServiceDate(Date serviceDate) {
+		this.serviceDate = serviceDate;
+	}
+	
 	
 }

@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/headFragment :: head">
+
+</head>
+<body>
+	<header th:replace="fragments/navBarFragment :: header"></header>
+	<div class="container">
+		<h1>Add new piston compressor:</h1>
+		<form action="#" th:action="@{/machines/add/PISTON_COMPRESSOR}" th:object="${machine}" th:modelAttribute="machineTypes" method="post">
+	    	<input   type="text" th:field="*{id}" th:readonly="true" hidden="true"/>
+	    	<input   type="text" th:field="*{machineType}" th:readonly="true" hidden="true"/>
+	    	<input   type="text" th:field="*{machineIdentifier}" th:readonly="true" hidden="true"/>
+	    	<div class="form-group">
+	    		<label for="modelInput">Model:</label>
+	    	 	<input  type="text" th:field="*{model}" id="modelInput" class="form-control"/>
+	    	 	<p th:each="err : ${#fields.errors('model')}" th:text="${err}" /></p>
+	    	</div> 
+	        
+	        <div class="form-group">
+	    		<label for="powerInput">Power:</label>
+	    	 	<input  type="text" th:field="*{power}" id="powerInput" class="form-control"/>
+	    	 	<p th:each="err : ${#fields.errors('power')}" th:text="${err}" /></p>
+	    	</div> 
+	    	
+	    	<div class="form-group">
+	    		<label for="consumptionInput">Energy consumption:</label>
+	    	 	<input  type="text" th:field="*{powerConsumption}" id="consumptionInput" class="form-control"/>
+	    	 	<p th:each="err : ${#fields.errors('powerConsumption')}" th:text="${err}" /></p>
+	    	</div> 
+	    	
+	    	<div class="form-group">
+	    		<label for="dimensionsInput">Dimensions:</label>
+	    	 	<input  type="text" th:field="*{dimension}" id="consumptionInput" class="form-control"/>
+	    	 	<p th:each="err : ${#fields.errors('dimension')}" th:text="${err}" /></p>
+	    	</div> 
+	    	
+	    	<div class="form-group">
+	    		<label for="weigthInput">Weigth:</label>
+	    	 	<input  type="text" th:field="*{weigth}" id="weigthInput" class="form-control"/>
+	    	 	<p th:each="err : ${#fields.errors('weigth')}" th:text="${err}" /></p>
+	    	</div>  
+	 
+	    	<div class="form-group">
+	    		<label for="numberOfPistons">Number of pistons:</label>
+	    	 	<input  type="text" th:field="*{numberOfPistons}" id="vnumberOfPistons" class="form-control"/>
+	    	 	<p th:each="err : ${#fields.errors('numberOfPistons')}" th:text="${err}" /></p>
+	    	</div> 
+	        
+	        <div class="form-group">
+	    		<label for="numberOfstage">Number Of Stages</label>
+	    	 	<input  type="text" th:field="*{numberOfstage}" id="numberOfstage" class="form-control"/>
+	    	 	<p th:each="err : ${#fields.errors('numberOfstage')}" th:text="${err}" /></p>
+	    	</div> 
+		<p><input type="submit" value="Submit" class="btn btn-primary mb-2" /> <input type="reset" value="Reset" class="btn btn-primary mb-2"/></p>
+	</form>
+	</div>	
+</body>
+</html>
