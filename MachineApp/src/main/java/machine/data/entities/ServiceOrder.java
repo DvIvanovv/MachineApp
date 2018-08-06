@@ -23,15 +23,24 @@ public class ServiceOrder {
 	private User user;
 	@ManyToMany
 	@JoinTable(name = "service_order_accessories")
-	List<Accessory> accsesories =new ArrayList<Accessory>();
+	List<Accessory> accsesories ;
 	@Column(name = "service_date")
 	private Date serviceDate;
+	
+	
+	
+	public ServiceOrder() {
+		super();
+		this.accsesories = new ArrayList<>();
+	}
+
 	/**
 	 * @return the id
 	 */
 	public Long getId() {
 		return id;
 	}
+	
 
 	/**
 	 * @param id the id to set

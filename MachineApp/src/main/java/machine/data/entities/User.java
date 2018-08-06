@@ -1,5 +1,6 @@
 package machine.data.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -18,6 +19,11 @@ public class User {
 	@OneToMany(mappedBy= "user")
 	private List<ServiceOrder> userOrders;
 	
+	
+	public User() {
+		super();
+		this.userOrders = new ArrayList<>();
+	}
 	public Long getId() {
 		return id;
 	}
