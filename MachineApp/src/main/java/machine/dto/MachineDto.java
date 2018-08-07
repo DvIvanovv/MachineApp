@@ -93,7 +93,6 @@ public class MachineDto {
 	
 	public  Class getMappedClass() {
 		return null;
-	}
-	
+	}	
 	
 }

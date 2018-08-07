@@ -14,9 +14,9 @@ import machine.data.entities.AuthGroup;
 import machine.data.entities.User;
 
 public class MachineAppUserPrincipal implements UserDetails{
-	
+
 	private User user;
-	
+
 	private List<AuthGroup> authGroups;
 
 	public MachineAppUserPrincipal(User user, List<AuthGroup> authGroups) {
@@ -37,7 +37,7 @@ public class MachineAppUserPrincipal implements UserDetails{
 		authGroups.forEach(agroup ->{
 			grantedAuthorities.add(new SimpleGrantedAuthority(agroup.getAuthGroup()));
 		});
-		
+
 		return grantedAuthorities;
 	}
 
@@ -56,7 +56,7 @@ public class MachineAppUserPrincipal implements UserDetails{
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return this.user.getPassword();
+		return this.user.getUsername();
 	}
 
 	/* (non-Javadoc)
@@ -94,7 +94,4 @@ public class MachineAppUserPrincipal implements UserDetails{
 		// TODO Auto-generated method stub
 		return true;
 	}
-	
-	
-	
 }

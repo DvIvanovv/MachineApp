@@ -9,16 +9,17 @@
 		<h1>Add new machine</h1>
 		<table>
 			<tr>
-				<td >Machine:</td>
-		    </tr>
-		    <tr th:each="type : ${machineTypes}">
-		    	<td ><a th:href="@{add/} +${type}" class="btn btn-primary btn-md btn-block" th:text="${type}">add</a></td>
-		    </tr>
+				<td>Machine:</td>
+			</tr>
+			<tr th:each="type : ${machineTypes}">
+				<td><a th:href="@{add/} +${type}"
+					class="btn btn-primary btn-md btn-block" th:text="${type}">add</a></td>
+			</tr>
 		</table>
-		<div >
-		<a ></a>
+		<div>
+			<a></a>
 		</div>
-	</div>	
+	</div>
 </body>
 </html>
 

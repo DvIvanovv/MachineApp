@@ -11,10 +11,9 @@ import machine.dto.MachineDto;
 @Transactional
 @Service
 public interface MachineService {
-	
+
 	void addMachine(MachineDto machineDto);
-	
-    List<Machine> getAllMachines();
-    
-   
+	List<Machine> getAllMachines();
+	Machine findByModel(String model);
+
 }

@@ -15,11 +15,11 @@ public class User {
 	private String username;
 	@Basic
 	private String password;
-	
-	@OneToMany(mappedBy= "user")
+
+	@OneToMany(mappedBy= "user",cascade = CascadeType.PERSIST)
 	private List<ServiceOrder> userOrders;
-	
-	
+
+
 	public User() {
 		super();
 		this.userOrders = new ArrayList<>();
@@ -48,6 +48,6 @@ public class User {
 	public void setUserOrders(List<ServiceOrder> userOrders) {
 		this.userOrders = userOrders;
 	}
-	
-	
+
+
 }

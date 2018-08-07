@@ -7,7 +7,6 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 public class MachineAppApplication {
 
-	
 	public static void main(String[] args) {
 		SpringApplication.run(MachineAppApplication.class, args);
 		

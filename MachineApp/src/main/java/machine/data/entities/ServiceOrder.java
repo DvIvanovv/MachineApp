@@ -9,26 +9,26 @@ import javax.persistence.*;
 @Entity
 @Table(name = "service_orders")
 public class ServiceOrder {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@ManyToOne
+
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "machinearanty_id", referencedColumnName = "id")
 	private Waranty waranty;
-	
-	@ManyToOne
+
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(name = "service_order_accessories")
 	List<Accessory> accsesories ;
 	@Column(name = "service_date")
 	private Date serviceDate;
-	
-	
-	
+
+
+
 	public ServiceOrder() {
 		super();
 		this.accsesories = new ArrayList<>();
@@ -40,7 +40,7 @@ public class ServiceOrder {
 	public Long getId() {
 		return id;
 	}
-	
+
 
 	/**
 	 * @param id the id to set
@@ -62,7 +62,7 @@ public class ServiceOrder {
 		this.accsesories = accsesories;
 	}
 
-	
+
 
 	public Waranty getWaranty() {
 		return waranty;
@@ -88,6 +88,6 @@ public class ServiceOrder {
 	public void setServiceDate(Date serviceDate) {
 		this.serviceDate = serviceDate;
 	}
-	
-	
+
+
 }

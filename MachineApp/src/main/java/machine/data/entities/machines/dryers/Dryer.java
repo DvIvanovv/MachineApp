@@ -18,7 +18,7 @@ public class Dryer extends Machine {
 	@NotBlank
 	private String compressedAirConnection;
 
-
+	
 	public Double getVolumetricFlowRate() {
 		return volumetricFlowRate;
 	}

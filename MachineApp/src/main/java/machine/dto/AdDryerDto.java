@@ -12,13 +12,11 @@ import machine.data.enums.MachineType;
 
 public class AdDryerDto extends MachineDto{
 
-	
 	@NotNull (message = "Въведете стойност")
 	private Double volumetricFlowRate;
 	@NotNull (message = "Въведете стойност")
 	private String compressedAirConnection;
 	
-
 	public AdDryerDto() {
 		super();
 		setMachineType(MachineType.ADSORPTION_DRYER);

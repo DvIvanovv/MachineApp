@@ -1,8 +1,5 @@
 package machine.dto;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 import machine.data.validations.PasswordMatches;
@@ -11,13 +8,13 @@ public class UserDto {
 
 	private Long id;
 
-    @NotEmpty
+	@NotEmpty
 	private String username;
-	
-    @NotEmpty
+
+	@NotEmpty
 	private String password;
-	
-    @NotEmpty
+
+	@NotEmpty
 	private String confirmPassword;
 
 	/**
@@ -76,7 +73,7 @@ public class UserDto {
 		this.confirmPassword = confirmPassword;
 	}
 
-	
-	
-	
+
+
+
 }

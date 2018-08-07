@@ -6,17 +6,15 @@ import machine.data.entities.machines.compressors.ScrewCompressor;
 import machine.data.enums.MachineType;
 
 public class ScrewCompressorDto extends MachineDto {
-	
-	
+
+
 	@NotNull
 	private Double volumeAt8Bars;
 	@NotNull
 	private Double volumeAt10Bars;
 	@NotNull
 	private Double volumeAt13Bars;
-	
-	
-	
+
 	public ScrewCompressorDto() {
 		super();
 		setMachineType(MachineType.SCREW_COMPRESSOR);
@@ -41,8 +39,8 @@ public class ScrewCompressorDto extends MachineDto {
 	}
 	@Override
 	public Class getMappedClass() {
-		
+
 		return ScrewCompressor.class;
 	}
-	
+
 }

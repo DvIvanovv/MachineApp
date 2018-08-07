@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
 	private AuthGroupRepository authGroupRepository;
 	private PasswordEncoder passwordEncoder;
 	private ModelMapper modelMapper;
-	
+
 	@Autowired
 	public UserServiceImpl(UserRepository userRepository, AuthGroupRepository authGroupRepository,
 			PasswordEncoder passwordEncoder, ModelMapper modelMapper) {
@@ -29,13 +29,13 @@ public class UserServiceImpl implements UserService {
 		this.authGroupRepository = authGroupRepository;
 		this.passwordEncoder = passwordEncoder;
 		this.modelMapper =  modelMapper;
-		
+
 	}
 
 	/* (non-Javadoc)
 	 * @see machine.services.UserService#isUserExists(java.lang.String)
 	 */
-	
+
 	@Override
 	public boolean isUsernameExist(String username) {
 		if(this.userRepository.findByUsername(username) != null) {
@@ -47,29 +47,30 @@ public class UserServiceImpl implements UserService {
 	/* (non-Javadoc)
 	 * @see machine.services.UserService#createUserAccount(machine.dto.UserDto)
 	 */
-        // the rest of the registration operation
-   
-    
+	// the rest of the registration operation
+
+
 	@Override
 	public User createUserAccount(UserDto userDto) throws IllegalArgumentException {
 		//User user = modelMapper.map(userDto, User.class);
 		if(isUsernameExist(userDto.getUsername())) {
-			   throw new  IllegalArgumentException (
-			              "There is an account with that email adress: "
-			              +  userDto.getUsername());
+			throw new  IllegalArgumentException (
+					"There is an account with that email adress: "
+							+  userDto.getUsername());
 		}
 		User user = new User();
 		user.setUsername( userDto.getUsername());
 		user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+		//user.setPassword(userDto.getPassword());
 		this.userRepository.save(user);
 		AuthGroup authGroup = new AuthGroup();
 		authGroup.setUsername(user.getUsername());
-		authGroup.setAuthGroup("ROLE_USER");
+		authGroup.setAuthGroup("USER");
 		this.authGroupRepository.save(authGroup);
 		return user;
-		
+
 	}
-	
-	
+
+
 
 }

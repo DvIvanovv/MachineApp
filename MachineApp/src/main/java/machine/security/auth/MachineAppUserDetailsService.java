@@ -16,7 +16,7 @@ import machine.data.repository.UserRepository;
 @Service
 public class MachineAppUserDetailsService  implements UserDetailsService{
 
-	
+
 	private UserRepository userRepository;
 	private AuthGroupRepository authGroupRepository;
 	@Autowired
@@ -37,8 +37,4 @@ public class MachineAppUserDetailsService  implements UserDetailsService{
 		List<AuthGroup> authGroups = this.authGroupRepository.findByUsername(username);
 		return new MachineAppUserPrincipal(user, authGroups);
 	}
-	
-	
-	
-	
 }

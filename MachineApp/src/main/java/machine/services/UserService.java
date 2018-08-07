@@ -8,7 +8,6 @@ import machine.dto.UserDto;
 public interface UserService {
 	
 	public boolean isUsernameExist(String username);
-	
 	public User createUserAccount(UserDto userDto);
 
 }

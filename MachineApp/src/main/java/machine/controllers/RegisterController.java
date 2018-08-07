@@ -3,7 +3,6 @@ package machine.controllers;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import machine.data.entities.User;
 import machine.dto.UserDto;
-import machine.security.auth.MachineAppUserDetailsService;
 import machine.services.UserService;
 
 @Controller
@@ -45,7 +43,7 @@ public class RegisterController {
 	    	return "register";
 	    }
 		if(bindingResult.hasErrors()) {
-			//model.addAttribute("user", userDto);
+			model.addAttribute("user", userDto);
 			return "register";
 		}
 		return "/login";

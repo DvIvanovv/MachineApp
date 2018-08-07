@@ -3,7 +3,7 @@ package machine.data.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "auth_user_group_name")
+@Table(name = "auth_user_group")
 public class AuthGroup {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,7 +48,7 @@ public class AuthGroup {
 	public void setAuthGroup(String authGroup) {
 		this.authGroup = authGroup;
 	}
-	
-	
+
+
 
 }

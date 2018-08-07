@@ -1,30 +1,25 @@
-package machine.data.entities;
+package machine.dto;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import machine.data.entities.machines.Machine;
 import machine.data.enums.AccessoryType;
 
-@Entity   
-@Table(name="accessories")
-public class Accessory {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class AccessoryDto {
+
 	private Long id;
 
-	@Column(name = "accessory_type")
+	@NotNull
 	private AccessoryType accessoryType;
-	@ManyToMany(cascade = CascadeType.PERSIST)
-	@JoinTable(name = "accessory_machine")
-	private List<Machine> machines;
+	//@NotNull
+	private List<String> machines;
 
-
-
-	public Accessory() {
+	public AccessoryDto() {
 		super();
 		this.machines = new ArrayList<>();
 	}
@@ -55,16 +50,13 @@ public class Accessory {
 	/**
 	 * @return the machines
 	 */
-	public List<Machine> getMachines() {
+	public List<String> getMachines() {
 		return machines;
 	}
 	/**
 	 * @param machines the machines to set
 	 */
-	public void setMachines(List<Machine> machines) {
+	public void setMachines(List<String> machines) {
 		this.machines = machines;
 	}
-
-
-
 }

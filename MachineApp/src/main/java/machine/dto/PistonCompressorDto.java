@@ -10,18 +10,18 @@ import machine.data.entities.machines.compressors.PistonCompressor;
 import machine.data.enums.MachineType;
 
 public class PistonCompressorDto extends MachineDto {
-	
+
 	@NotNull
 	protected short numberOfPistons;
 	@NotNull
 	protected short numberOfstage;
-	
-	
+
+
 	public PistonCompressorDto() {
 		super();
 		setMachineType(MachineType.PISTON_COMPRESSOR);
 	}
-	
+
 	public short getNumberOfPistons() {
 		return numberOfPistons;
 	}
@@ -39,7 +39,7 @@ public class PistonCompressorDto extends MachineDto {
 		// TODO Auto-generated method stub
 		return PistonCompressor.class;
 	}
-	
-	
-	
+
+
+
 }

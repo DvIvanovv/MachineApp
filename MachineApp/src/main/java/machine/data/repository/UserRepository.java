@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import machine.data.entities.User;
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
-		
+
 	User findByUsername(String username);
 }

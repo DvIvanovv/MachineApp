@@ -2,11 +2,7 @@ package machine.data.entities;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.*;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -14,7 +10,7 @@ import machine.data.entities.machines.Machine;
 @Entity
 @Table(name = "waranties")
 public class Waranty {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -26,12 +22,12 @@ public class Waranty {
 	@NotBlank
 	@Size(min = 10, max = 10)
 	private String serialNumber;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "machine_id")
 	private Machine machine;
 	@Column(name="is_approved")
 	private boolean isApproved = false;
-	
+
 	/**
 	 * @return the id
 	 */
@@ -86,5 +82,5 @@ public class Waranty {
 	public void setApproved(boolean isApproved) {
 		this.isApproved = isApproved;
 	}
-	
+
 }

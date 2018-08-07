@@ -15,7 +15,7 @@ import machine.services.MachineService;
 @Transactional
 @Service
 public class MachineServiceImpl implements MachineService {
-		
+
 	private MachineRepository machineRepository;
 	private ModelMapper mapper;
 	@Autowired
@@ -30,6 +30,10 @@ public class MachineServiceImpl implements MachineService {
 		Machine machine = (Machine)mapper.map(machineDto, machineDto.getMappedClass());
 		this.machineRepository.save(machine);
 	}
+	
+	public Machine findByModel(String model) {
+		return this.machineRepository.findByModel(model);
+	}
 
 
 
@@ -38,7 +42,7 @@ public class MachineServiceImpl implements MachineService {
 	public List<Machine> getAllMachines() {	
 		return (List<Machine>)this.machineRepository.findAll();
 	}
-	
-	
+
+
 
 }
