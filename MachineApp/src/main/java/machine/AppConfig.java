@@ -11,4 +11,6 @@ public class AppConfig {
 	public ModelMapper createModelMapper(){
 		return new ModelMapper();
 	}
+	
+//	TODO add additional configuration, e.g. security
 }

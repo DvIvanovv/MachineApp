@@ -42,13 +42,13 @@ public class AccessoryController 	{
 	}
 	
 	@PostMapping("/add")
-	public String addAccessory( @ModelAttribute("accessory") AccessoryDto accessory, BindingResult bindingResult, Model model) {
+	public String addAccessory(@ModelAttribute("accessory") AccessoryDto accessory, BindingResult bindingResult, Model model) {
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("accessory", accessory);
 			return "addAccessory";
 		}
 		this.accessoryService.addAccessory(accessory);
-		return "index";
+		return "index"; //TODO go to accessory list instead of index
 	}
 	
 	
@@ -58,15 +58,11 @@ public class AccessoryController 	{
 		machines = machineService.getAllMachines();
 		return machines;
 	}
+	
 	@ModelAttribute("accessoryTypes")
 	public List<AccessoryType> accessoryTypes() {
 		List<AccessoryType> accessoryTypes=new ArrayList<>();
 		accessoryTypes.addAll(Arrays.asList(AccessoryType.values()));
 		return accessoryTypes;
 	}
-
-
-	
-	
-
 }

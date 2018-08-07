@@ -1,38 +1,50 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <title>MACHINE APP</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>MACHINE APP</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-	<body>
-	<header   th:fragment="header">
-	 <nav class="navbar navbar-expand-lg navbar-light bg-ligth" style="background-color: #e3f2fd;">
-	 	<img src="/img/logo.png" width="30" height="30" alt="">
-		<a class="navbar-brand" href="#">MACHINE APP</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-         <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="#">Products</a>
-            <a class="nav-item nav-link" th:href="@{/login}"  sec:authorize="isAnonymous()">Login</a>
-            <a class="nav-item nav-link" th:href="@{/logout}"   sec:authorize="isAuthenticated()">Log out</a>
-            <a class="nav-item nav-link" href="#" th:href="@{/register}" >Register</a>
-           <div  class="nav-item dropdown"  sec:authorize="hasRole('ROLE_ADMIN') and hasRole('ROLE_USER')">
-                    <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Add
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" th:href="@{/machines/add}">Machine</a>
-                        <a class="dropdown-item" th:href="@{/accessories/add}">Accessory</a>
-                    </div>
-             
-           
-           </div>
-         </div>
-        </div>
-    </nav>
+<body>
+	<header th:fragment="header">
+		<nav class="navbar navbar-expand-lg navbar-light bg-ligth"
+			style="background-color: #e3f2fd;">
+			<img src="/img/logo.png" width="30" height="30" alt=""> <a
+				class="navbar-brand" href="#">MACHINE APP</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+					<a class="nav-item nav-link active" href="/">Home <span
+						class="sr-only">(current)</span></a> <a class="nav-item nav-link"
+						href="#">Products</a>
+					<div class="nav-item dropdown"
+						sec:authorize="hasRole('ROLE_ADMIN') and hasRole('ROLE_USER')">
+						<a class="nav-link dropdown-toggle" href="http://example.com"
+							id="navbarDropdownMenuLink" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false"> Add </a>
+						<div class="dropdown-menu"
+							aria-labelledby="navbarDropdownMenuLink">
+							<a class="dropdown-item" th:href="@{/machines/add}">Machine</a> <a
+								class="dropdown-item" th:href="@{/accessories/add}">Accessory</a>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+			<div class="nav navbar-nav navbar-right">
+				<a class="nav-item nav-link" th:href="@{/login}"
+					sec:authorize="isAnonymous()">Login</a> <a
+					class="nav-item nav-link" th:href="@{/logout}"
+					sec:authorize="isAuthenticated()">Log out</a> <a
+					class="nav-item nav-link" href="#" th:href="@{/register}"
+					sec:authorize="isAnonymous()">Register</a>
+			</div>
+		</nav>
 	</header>
 </body>
 </html>

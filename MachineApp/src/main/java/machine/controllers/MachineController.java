@@ -30,6 +30,7 @@ public class MachineController {
 		super();
 		this.machineService = machineService;
 	}
+	
 	@GetMapping("/add")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ModelAndView getAddMachineForm(ModelAndView modelAndView) {
@@ -38,12 +39,12 @@ public class MachineController {
 		return modelAndView;
 	}
 
+//	TODO is this method needed at all?
 	@PostMapping("/add") 
-	public String addMachine(@ModelAttribute String machineType , BindingResult result, ModelAndView modelAndView) {
+	public String addMachine(@ModelAttribute String machineType) {
 
 		return "redirect:/machines/add/"+ machineType;
 	}
-
 
 	@GetMapping("/add/SCREW_COMPRESSOR")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -53,6 +54,7 @@ public class MachineController {
 		modelAndView.setViewName("addScrew");
 		return modelAndView;
 	}
+	
 	@PostMapping("/add/SCREW_COMPRESSOR")
 	//@PostMapping("/edit/{type}") @PathVariable String type,
 	public ModelAndView AddScrewCompressor(@Valid @ModelAttribute ("machine") ScrewCompressorDto machine, BindingResult bindingResult, ModelAndView modelAndView) {
@@ -62,7 +64,6 @@ public class MachineController {
 			return modelAndView;
 		}
 		this.machineService.addMachine(machine);
-		//			modelAndView.setViewName("index");
 		return new ModelAndView("redirect:/");
 
 	}
@@ -73,6 +74,7 @@ public class MachineController {
 		modelAndView.setViewName("addPiston");
 		return modelAndView;
 	}
+	
 	@PostMapping("/add/PISTON_COMPRESSOR")
 	public ModelAndView AddPistonCompressor(@Valid @ModelAttribute ("machine") PistonCompressorDto machine, BindingResult bindingResult, ModelAndView modelAndView) {
 		if(bindingResult.hasErrors()) {
@@ -105,12 +107,14 @@ public class MachineController {
 		return new ModelAndView("redirect:/");
 
 	}
+	
 	@GetMapping("/add/REFRIGERATION_DRYER")
 	public ModelAndView getFfdAdDryerForm(ModelAndView modelAndView) {
 		modelAndView.addObject("machine", new RfDryerDto());
 		modelAndView.setViewName("addRefrigeneration");
 		return modelAndView;
 	}
+	
 	@PostMapping("/add/REFRIGERATION_DRYER")
 	public ModelAndView AddRfDryer(@Valid @ModelAttribute ("machine") RfDryerDto machine, BindingResult bindingResult, ModelAndView modelAndView) {
 		if(bindingResult.hasErrors()) {
@@ -123,14 +127,11 @@ public class MachineController {
 		return new ModelAndView("redirect:/");
 
 	}
+	
 	@ModelAttribute("machineTypes")
 	public List<MachineType> machineTypes() {
 		List<MachineType> machineTypes=new ArrayList<>();
 		machineTypes.addAll(Arrays.asList(MachineType.values()));
 		return machineTypes;
 	}
-
-
-
-
 }
