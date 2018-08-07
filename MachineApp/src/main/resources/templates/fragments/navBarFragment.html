@@ -19,13 +19,13 @@
             <a class="nav-item nav-link" th:href="@{/login}"  sec:authorize="isAnonymous()">Login</a>
             <a class="nav-item nav-link" th:href="@{/logout}"   sec:authorize="isAuthenticated()">Log out</a>
             <a class="nav-item nav-link" href="#" th:href="@{/register}" >Register</a>
-           <div  class="nav-item dropdown"  sec:authorize="isAuthenticated()">
+           <div  class="nav-item dropdown"  sec:authorize="hasRole('ROLE_ADMIN') and hasRole('ROLE_USER')">
                     <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Add
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" th:href="@{/machines/add}">Machine</a>
-                        <a class="dropdown-item" th:href="@{/accessory/add}">Accessory</a>
+                        <a class="dropdown-item" th:href="@{/accessories/add}">Accessory</a>
                     </div>
              
            

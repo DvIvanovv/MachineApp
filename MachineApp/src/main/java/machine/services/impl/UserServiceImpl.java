@@ -1,6 +1,6 @@
 package machine.services.impl;
 
-import javax.transaction.Transactional;
+import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,10 +67,13 @@ public class UserServiceImpl implements UserService {
 		authGroup.setUsername(user.getUsername());
 		authGroup.setAuthGroup("USER");
 		this.authGroupRepository.save(authGroup);
+		List<User> users = (List<User>)userRepository.findAll();
+		for(User user1 : users) {
+			System.out.println("username: " + user1.getUsername());
+			System.out.println("password: " + user1.getPassword());
+		}
 		return user;
-
+		
 	}
-
-
 
 }

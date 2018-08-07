@@ -3,10 +3,8 @@ package machine.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import machine.data.entities.machines.Machine;
 import machine.data.enums.AccessoryType;
 
 

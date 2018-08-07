@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,7 @@ public class MachineController {
 		this.machineService = machineService;
 	}
 	@GetMapping("/add")
-	//@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ModelAndView getAddMachineForm(ModelAndView modelAndView) {
 		modelAndView.addObject("machineType", new String());
 		modelAndView.setViewName("addMachine");
@@ -45,7 +46,7 @@ public class MachineController {
 
 
 	@GetMapping("/add/SCREW_COMPRESSOR")
-	//@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 		//@GetMapping("/edit/{type}") @PathVariable String machineType
 	public ModelAndView getAddScrewCompressorForm(ModelAndView modelAndView) {
 		modelAndView.addObject("machine", new ScrewCompressorDto());

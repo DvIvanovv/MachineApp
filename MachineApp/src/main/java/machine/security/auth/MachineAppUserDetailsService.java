@@ -31,7 +31,7 @@ public class MachineAppUserDetailsService  implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = this.userRepository.findByUsername(username);	
-		if(null!= user) {
+		if(null == user) {
 			throw new UsernameNotFoundException("Username: " + username + " not found!");
 		}
 		List<AuthGroup> authGroups = this.authGroupRepository.findByUsername(username);

@@ -1,12 +1,7 @@
 package machine.dto;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
-import machine.data.entities.Waranty;
-import machine.data.entities.machines.compressors.PistonCompressor;
 import machine.data.entities.machines.dryers.RefrigerationDryer;
 import machine.data.enums.MachineType;
 

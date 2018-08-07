@@ -27,7 +27,7 @@ public class MachineServiceImpl implements MachineService {
 
 	@Override
 	public void addMachine(MachineDto machineDto) {
-		Machine machine = (Machine)mapper.map(machineDto, machineDto.getMappedClass());
+		Machine machine = (Machine)mapper.map(machineDto, Machine.class);
 		this.machineRepository.save(machine);
 	}
 	

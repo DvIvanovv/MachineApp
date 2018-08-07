@@ -2,6 +2,7 @@ package machine.dto;
 
 
 import javax.validation.constraints.NotNull;
+
 import machine.data.entities.machines.compressors.ScrewCompressor;
 import machine.data.enums.MachineType;
 
