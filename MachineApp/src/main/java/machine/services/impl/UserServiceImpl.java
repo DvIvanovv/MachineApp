@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
 		//User user = modelMapper.map(userDto, User.class);
 		if(isUsernameExist(userDto.getUsername())) {
 			throw new  IllegalArgumentException (
-					"There is an account with that email adress: "
+					"There is an account with username: "
 							+  userDto.getUsername());
 		}
 		User user = new User();

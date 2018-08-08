@@ -3,7 +3,13 @@ package machine.dto;
 import javax.validation.constraints.NotEmpty;
 
 import machine.data.validations.PasswordMatches;
-@PasswordMatches
+@PasswordMatches.List({
+	@PasswordMatches(
+			field = "password",
+			fieldMatch = "confirmPassword",
+			message = "Passwords do not match"
+	)
+})
 public class UserDto {
 
 	private Long id;

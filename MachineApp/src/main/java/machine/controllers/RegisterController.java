@@ -33,20 +33,22 @@ public class RegisterController {
 	
 	@PostMapping("/register")
 	public String registerUser(@Valid @ModelAttribute("user") UserDto userDto, BindingResult bindingResult, Model model) {
-		User registered = new User();
-		if(!bindingResult.hasErrors()) {
-			registered = this.userService.createUserAccount(userDto);
-		}
-	    if( registered == null) {
-	    	bindingResult.rejectValue("username", "message.regError");
-	    	
-	    	model.addAttribute("user", userDto);
-	    	return "register";
-	    }
 		if(bindingResult.hasErrors()) {
 			//model.addAttribute("user", userDto);
+			if (bindingResult.hasGlobalErrors()) {
+				bindingResult.rejectValue("confirmPassword", "404", bindingResult.getGlobalError().getDefaultMessage());
+			}
 			return "register";
 		}
+
+		try {
+			this.userService.createUserAccount(userDto);
+		} catch (IllegalArgumentException e) {
+			bindingResult.rejectValue("username","404", e.getMessage());
+			model.addAttribute("user", userDto);
+			return "register";
+		}
+
 		return "/login";
 	}
 }
