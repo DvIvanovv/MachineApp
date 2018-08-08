@@ -7,36 +7,30 @@
 	<header th:replace="fragments/navBarFragment :: header"></header>
 	<div class="container">
 		<h1>Add new Accessory</h1>
-		<form action="#" th:action="@{/accessories/add}"
-			th:object="${accessory}"  method="post">
-			<input type="text" th:field="*{id}" th:readonly="true" hidden="true" />
-			<div class="form-group">
-				<label for="accessoryType">Type</label> <select th:multiple="false"
-					class="form-control" id="accessoryType" name="accessoryType"
-					th:field="*{accessoryType}">
-					<option th:each="type : ${accessoryTypes}" th:value="${{type}}"
-						th:text="${type.name()}">Option 1</option>
-				</select> <small id="capHelp" class="form-control-feedback"
-					th:each="error : ${#fields.errors('machines')}" th:text="${error}">Error
-					Message</small>
+		<form action="#" th:action="@{/accessories/add}" th:object="${accessory}"  method="post">
+			<input type="text" th:field="*{id}" th:readonly="true" hidden="true" />	
+			<div class="form-group row ">
+				<label for="accessoryType" class="col-sm-2 col-form-label">Type</label>
+				<div class="col-sm-4">
+				 	<select th:multiple="false" class="form-control" id="accessoryType" name="accessoryType" th:field="*{accessoryType}">
+						<option th:each="type : ${accessoryTypes}" th:value="${{type}}" th:text="${type.name()}">Type</option>
+					</select>
+				 	<small id="capHelp" class="form-control-feedback" th:each="error : ${#fields.errors('accessoryType')}" th:text="${error}">Error Message</small>
+				</div>
 			</div>
-			<div class="form-group">
-				<label for="machines">Machines</label> <select th:multiple="true"
-					class="form-control" id="machines" name="machines"
-					th:field="*{machines}">
-					<option th:each="machine : ${machines}" th:value="${machine.model}"
-						th:text="${machine.model}">Option 1</option>
-				</select> <small id="capHelp" class="form-control-feedback"
-					th:each="error : ${#fields.errors('machines')}" th:text="${error}">Error
-					Message</small>
+			<div class="form-group col-sm-6">
+				<label for="machines" class="col-sm-4 col-form-label">For machines</label> 
+				<select th:multiple="true" class="form-control" id="machines" name="machines" th:field="*{machines}">
+					<option th:each="machine : ${machines}" th:value="${machine.model}" th:text="${machine.model}">Option 1</option>
+				</select> 
+				<small id="capHelp" class="form-control-feedback" th:each="error : ${#fields.errors('machines')}" th:text="${error}">Error Message</small>
 			</div>
-
 			<p>
 				<input type="submit" value="Submit" class="btn btn-primary mb-2" />
 				<input type="reset" value="Reset" class="btn btn-primary mb-2" />
 			</p>
 		</form>
-
 	</div>
+	<footer th:replace="fragments/footerFragment :: footer">></footer>
 </body>
 </html>

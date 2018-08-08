@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/headFragment :: head">
+
+</head>
+<body>
+	<header th:replace="fragments/navBarFragment :: header"></header>
+	<div class="container">
+		<h1>RF DRYERS</h1>
+		
+		<div class="row justify-content-around " >
+		 <th:block th:each="machine : ${machines}">
+			<div class="col-lg-4 col-md-6 col-sm-12 breadcrumb justify-content-center"  style="margin: 5px 5px 5px 5px;">
+			<img src="/img/logo.png"/>
+			<table >
+			<tr class="bg-primary  table table-bordered">
+				<td scope="col">Model</td>
+				<td scope="col">Power</td>
+				<td scope="col">Consumption</td>
+				<td scope="col">Dimensions</td>
+			
+			</tr>
+			<tr class="bg-info">
+				<td th:text="${machine.model}">Model</td>
+				<td th:text="${machine.power}">Model</td>
+				<td th:text="${machine.powerConsumption}">Model</td>
+				<td th:text="${machine.dimension}">Model</td>
+			</tr>
+		</table>
+			
+			
+			</div>
+			</th:block>	
+			</div>
+		
+	</div>
+	<footer th:replace="fragments/footerFragment :: footer">></footer>
+</body>
+</html>

@@ -3,6 +3,7 @@ package machine.dto;
 import javax.validation.constraints.NotNull;
 
 import machine.data.entities.machines.compressors.PistonCompressor;
+import machine.data.entities.machines.compressors.ScrewCompressor;
 import machine.data.enums.MachineType;
 
 public class PistonCompressorDto extends MachineDto {
@@ -32,10 +33,6 @@ public class PistonCompressorDto extends MachineDto {
 	}
 	@Override
 	public Class getMappedClass() {
-		// TODO Auto-generated method stub
 		return PistonCompressor.class;
 	}
-
-
-
 }

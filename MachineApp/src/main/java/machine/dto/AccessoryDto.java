@@ -3,6 +3,7 @@ package machine.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import machine.data.enums.AccessoryType;
@@ -14,7 +15,7 @@ public class AccessoryDto {
 
 	@NotNull
 	private AccessoryType accessoryType;
-	//@NotNull
+	@NotEmpty
 	private List<String> machines;
 
 	public AccessoryDto() {

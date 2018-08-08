@@ -39,12 +39,6 @@ public class MachineController {
 		return modelAndView;
 	}
 
-//	TODO is this method needed at all?
-	@PostMapping("/add") 
-	public String addMachine(@ModelAttribute String machineType) {
-
-		return "redirect:/machines/add/"+ machineType;
-	}
 
 	@GetMapping("/add/SCREW_COMPRESSOR")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -56,7 +50,7 @@ public class MachineController {
 	}
 	
 	@PostMapping("/add/SCREW_COMPRESSOR")
-	//@PostMapping("/edit/{type}") @PathVariable String type,
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ModelAndView AddScrewCompressor(@Valid @ModelAttribute ("machine") ScrewCompressorDto machine, BindingResult bindingResult, ModelAndView modelAndView) {
 		if(bindingResult.hasErrors()) {
 			modelAndView.addObject("machine", machine);
@@ -69,6 +63,7 @@ public class MachineController {
 	}
 
 	@GetMapping("/add/PISTON_COMPRESSOR")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ModelAndView getAddPistonCompressorForm(ModelAndView modelAndView) {
 		modelAndView.addObject("machine", new PistonCompressorDto());
 		modelAndView.setViewName("addPiston");
@@ -76,6 +71,7 @@ public class MachineController {
 	}
 	
 	@PostMapping("/add/PISTON_COMPRESSOR")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ModelAndView AddPistonCompressor(@Valid @ModelAttribute ("machine") PistonCompressorDto machine, BindingResult bindingResult, ModelAndView modelAndView) {
 		if(bindingResult.hasErrors()) {
 			modelAndView.addObject("machine", machine);
@@ -89,6 +85,7 @@ public class MachineController {
 	}
 
 	@GetMapping("/add/ADSORPTION_DRYER")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ModelAndView getAddAdDryerForm(ModelAndView modelAndView) {
 		modelAndView.addObject("machine", new AdDryerDto());
 		modelAndView.setViewName("addAdsorption");
@@ -96,6 +93,7 @@ public class MachineController {
 	}
 	
 	@PostMapping("/add/ADSORPTION_DRYER")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ModelAndView AddAdDryer(@Valid @ModelAttribute ("machine") AdDryerDto machine, BindingResult bindingResult, ModelAndView modelAndView) {
 		if(bindingResult.hasErrors()) {
 			modelAndView.addObject("machine", machine);
@@ -109,6 +107,7 @@ public class MachineController {
 	}
 	
 	@GetMapping("/add/REFRIGERATION_DRYER")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ModelAndView getFfdAdDryerForm(ModelAndView modelAndView) {
 		modelAndView.addObject("machine", new RfDryerDto());
 		modelAndView.setViewName("addRefrigeneration");
@@ -116,6 +115,7 @@ public class MachineController {
 	}
 	
 	@PostMapping("/add/REFRIGERATION_DRYER")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ModelAndView AddRfDryer(@Valid @ModelAttribute ("machine") RfDryerDto machine, BindingResult bindingResult, ModelAndView modelAndView) {
 		if(bindingResult.hasErrors()) {
 			modelAndView.addObject("machine", machine);
@@ -126,6 +126,35 @@ public class MachineController {
 		//			modelAndView.setViewName("index");
 		return new ModelAndView("redirect:/");
 
+	}
+	@GetMapping("/showAll/REFRIGERATION_DRYER")
+	public ModelAndView getShowAllRfDryerForm(ModelAndView modelAndView) {
+		modelAndView.addObject("machines", this.machineService.getAllMachinesByType(MachineType.REFRIGERATION_DRYER));
+		modelAndView.addObject("machineType", "Show all Ad Dryers");
+		modelAndView.setViewName("showAllFromType");
+		return modelAndView;
+	}
+	@GetMapping("/showAll/ADSORPTION_DRYER")
+	public ModelAndView getShowAllAdDryerForm(ModelAndView modelAndView) {
+		modelAndView.addObject("machines", this.machineService.getAllMachinesByType(MachineType.ADSORPTION_DRYER));
+		modelAndView.addObject("machineType", "Show all RF Dryers");
+		modelAndView.setViewName("showAllFromType");
+		return modelAndView;
+	}
+	
+	@GetMapping("/showAll/PISTON_COMPRESSOR")
+	public ModelAndView getShowAllPistonCompressors(ModelAndView modelAndView) {
+		modelAndView.addObject("machines", this.machineService.getAllMachinesByType(MachineType.PISTON_COMPRESSOR));
+		modelAndView.addObject("machineType", "Show all Piston Compressors");
+		modelAndView.setViewName("showAllFromType");
+		return modelAndView;
+	}
+	@GetMapping("/showAll/SCREW_COMPRESSOR")
+	public ModelAndView getShowAllScrewCompressors(ModelAndView modelAndView) {
+		modelAndView.addObject("machines", this.machineService.getAllMachinesByType(MachineType.SCREW_COMPRESSOR));
+		modelAndView.addObject("machineType", "Show all Screw Compressors");
+		modelAndView.setViewName("showAllFromType");
+		return modelAndView;
 	}
 	
 	@ModelAttribute("machineTypes")

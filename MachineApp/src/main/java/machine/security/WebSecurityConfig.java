@@ -53,6 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				, "/index"
 				, "/home"
 				,"/register"
+				,"/machines/showAll/*"
 				, "/js/*"
 				, "/css/*"
 				, "/img/*")

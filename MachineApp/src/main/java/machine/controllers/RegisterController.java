@@ -39,11 +39,12 @@ public class RegisterController {
 		}
 	    if( registered == null) {
 	    	bindingResult.rejectValue("username", "message.regError");
+	    	
 	    	model.addAttribute("user", userDto);
 	    	return "register";
 	    }
 		if(bindingResult.hasErrors()) {
-			model.addAttribute("user", userDto);
+			//model.addAttribute("user", userDto);
 			return "register";
 		}
 		return "/login";

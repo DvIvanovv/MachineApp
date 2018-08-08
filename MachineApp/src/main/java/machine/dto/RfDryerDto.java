@@ -32,7 +32,6 @@ public class RfDryerDto extends MachineDto {
 
 	@Override
 	public Class getMappedClass() {
-		// TODO Auto-generated method stub
 		return RefrigerationDryer.class;
 	}
 }

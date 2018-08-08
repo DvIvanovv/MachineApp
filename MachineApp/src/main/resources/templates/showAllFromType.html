@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/headFragment :: head">
+
+</head>
+<body>
+	<header th:replace="fragments/navBarFragment :: header"></header>
+	<div class="container">
+		<h1 th:text="${machineType}">machine type</h1>
+		
+		<div class="row justify-content-around " >
+		 <th:block th:each="machine : ${machines}">
+			<div class="col-lg-4 col-md-6 col-sm-12 breadcrumb justify-content-center"  style="margin: 5px 5px 5px 5px;">
+			<img src="/img/logo.png" class=" float-left" alt="Responsive image" >
+			
+		<ul class="list-group"> 
+			<li  class="list-group-item" th:text="'Model: ' + ${machine.model}"></li>
+			<li class="list-group-item" th:text="'Power: ' + ${machine.power}"></li>
+			<li class="list-group-item" th:text="'Consumption: ' + ${machine.powerConsumption}"></li>
+			<li class="list-group-item"  th:text="'Dimensions: ' + ${machine.dimension}"></li>
+			<li class="list-group-item"><a href="#" >Details</a></li>
+		</ul>
+
+			</div>
+			</th:block>	
+			</div>
+		
+	</div>
+	<footer th:replace="fragments/footerFragment :: footer">></footer>
+</body>
+</html>

@@ -5,7 +5,7 @@
 <head th:replace="fragments/headFragment :: head">
 </head>
 <body>
-
+	<header th:replace="fragments/navBarFragment :: header"></header>
 	<div layout:fragment="content">
 		<div class="container main-content">
 			<h3>Login</h3>
@@ -19,6 +19,7 @@
 					<div class="col-sm-6">
 						<input type="text" id="username" name="username"
 							class="form-control" placeholder="Username" autofocus="autofocus">
+							
 					</div>
 				</div>
 				<div class="form-group row">
@@ -36,6 +37,6 @@
 			</form>
 		</div>
 	</div>
-
+<footer th:replace="fragments/footerFragment :: footer">></footer>
 </body>
 </html>

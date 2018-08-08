@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import machine.data.entities.machines.Machine;
+import machine.data.enums.MachineType;
 import machine.data.repository.MachineRepository;
 import machine.dto.MachineDto;
 import machine.services.MachineService;
@@ -27,7 +28,7 @@ public class MachineServiceImpl implements MachineService {
 
 	@Override
 	public void addMachine(MachineDto machineDto) {
-		Machine machine = (Machine)mapper.map(machineDto, Machine.class);
+		Machine machine =(Machine) mapper.map(machineDto, machineDto.getMappedClass());
 		this.machineRepository.save(machine);
 	}
 	
@@ -43,6 +44,13 @@ public class MachineServiceImpl implements MachineService {
 		return (List<Machine>)this.machineRepository.findAll();
 	}
 
-
-
+	/* (non-Javadoc)
+	 * @see machine.services.MachineService#getAllMachinesByType(machine.data.enums.MachineType)
+	 */
+	@Override
+	public List<Machine> getAllMachinesByType(MachineType machineType) {
+		// TODO Auto-generated method stub
+		return this.machineRepository.findAllByMachineType(machineType);
+	}
+		
 }
