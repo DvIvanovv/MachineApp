@@ -5,7 +5,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import machine.data.entities.Waranty;
+import machine.data.entities.Warranty;
 import machine.data.enums.MachineType;
 
 public class MachineDto {
@@ -30,7 +30,7 @@ public class MachineDto {
 	@Min(1)
 	protected Double weigth;
 	
-	protected Waranty waranty;
+	protected Warranty waranty;
 	@NotNull (message = "Въведете стойност")
 	protected MachineType machineType;
 	
@@ -82,10 +82,10 @@ public class MachineDto {
 	public void setWeigth(Double weigth) {
 		this.weigth = weigth;
 	}
-	public Waranty getWaranty() {
+	public Warranty getWaranty() {
 		return waranty;
 	}
-	public void setWaranty(Waranty waranty) {
+	public void setWaranty(Warranty waranty) {
 		this.waranty = waranty;
 	}
 	public MachineType getMachineType() {

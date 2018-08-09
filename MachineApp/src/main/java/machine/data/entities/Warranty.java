@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 import machine.data.entities.machines.Machine;
 @Entity
 @Table(name = "waranties")
-public class Waranty {
+public class Warranty {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +22,8 @@ public class Waranty {
 	@NotBlank
 	@Size(min = 10, max = 10)
 	private String serialNumber;
+	@NotBlank
+	private String username;
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "machine_id")
 	private Machine machine;
@@ -82,5 +84,18 @@ public class Waranty {
 	public void setApproved(boolean isApproved) {
 		this.isApproved = isApproved;
 	}
+	/**
+	 * @return the username
+	 */
+	public String getUsername() {
+		return username;
+	}
+	/**
+	 * @param username the username to set
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
 
 }

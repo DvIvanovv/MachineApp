@@ -16,7 +16,7 @@ public class ServiceOrder {
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "machinearanty_id", referencedColumnName = "id")
-	private Waranty waranty;
+	private Warranty waranty;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -64,11 +64,11 @@ public class ServiceOrder {
 
 
 
-	public Waranty getWaranty() {
+	public Warranty getWaranty() {
 		return waranty;
 	}
 
-	public void setWaranty(Waranty waranty) {
+	public void setWaranty(Warranty waranty) {
 		this.waranty = waranty;
 	}
 
