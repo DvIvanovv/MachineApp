@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService {
 			this.authGroupRepository.save(role);
 			return  username + " is now manager.";
 		}
-		return username + "is awready manager.";
+		return username + "is allready a manager.";
 	}
 
 	
@@ -114,7 +114,7 @@ public class UserServiceImpl implements UserService {
 			this.authGroupRepository.delete(role);
 			return  username + " is now user.";
 		}
-		return  username + " is awready st a user.";
+		return  username + " is allready just a user.";
 	}
 
 	private boolean isManager(String username) {

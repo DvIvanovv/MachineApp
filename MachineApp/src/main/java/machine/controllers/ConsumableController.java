@@ -47,7 +47,7 @@ public class ConsumableController 	{
 	}
 	
 	@PostMapping("/add")
-	@PreAuthorize("hasRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
 	public String addAccessory(@Valid @ModelAttribute("accessory") ConsumableDto accessory, BindingResult bindingResult, Model model) {
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("accessory", accessory);

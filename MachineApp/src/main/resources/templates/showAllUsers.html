@@ -8,23 +8,23 @@
 	<div class="container">
 		<h1>All Users:</h1>
 		
-		<table class="table">
+		<table class="table" >
             <thead>
-            <tr>
-                
-                <th>Username:</th>
-                <th>Add</th> 
-                <th>Remove</th>  
+            <tr>     
+                <th scope="col">Username:</th>
+                <th scope="col">Add</th> 
+                <th scope="col">Remove</th>  
             </tr>
             </thead>
             <tbody>
             <tr th:each="user : ${users}" th:object="${user}">
+            	
                 <td th:text="*{id}" th:readonly="true" hidden="true" >id</td>
-                <td th:text="*{username}">name</td>
-                <td>
-                    <a class="btn btn-secondary" th:href="|/manage/edit/*{username}|">Add manager role</a>
+                <td th:text="*{username}" >name</td>
+                <td >
+                    <a class="btn btn-secondary" th:href="|/manage/edit/*{username}|" >Add manager role</a>
                 </td>
-                <td>
+                <td >
                     <a class="btn btn-secondary" th:href="|/manage/delete/*{username}|">Remove manager role</a>
                 </td>
             </tr>
