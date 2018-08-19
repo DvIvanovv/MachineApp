@@ -6,10 +6,23 @@
 <body>
 	<header th:replace="fragments/navBarFragment :: header"></header>
 	<div class="container">
-		<h1>Add Screw compressor</h1>
-		<form action="#" htmlEscape="true" th:action="@{/machines/add/SCREW_COMPRESSOR}" th:object="${machine}" method="post">
+		<h1>Add new machine:</h1>
+		<form action="#" htmlEscape="true" th:action="@{/machines/add1}" th:object="${machine}" method="post">
 			<input type="text" th:field="*{id}" th:readonly="true" hidden="true" />
-			<input type="text" th:field="*{machineType}" th:readonly="true" hidden="true" /> <input type="text" th:field="*{machineIdentifier}" th:readonly="true" hidden="true" />
+		
+		<div class="form-group row ">
+		<label for="machineType" class="col-sm-2 col-form-label">Machine type:</label>
+			<div class="form-group  col-sm-4">
+			
+    			<select class="form-control" id="machineType" name="machineType" th:field="*{machineType}">
+        			  <option value="#">Choose Machine</option>
+        			<option th:each="type : ${machineTypes}"
+                		th:value="${type}"
+                		th:text="${type}"></option>
+    			</select>
+			</div>
+		</div>
+			<!--<input type="text" th:field="*{machineType}" th:readonly="true" hidden="true" /> <input type="text" th:field="*{machineIdentifier}" th:readonly="true" hidden="true" />-->
 			<div class="form-group row ">
 				<label for="modelInput" class="col-sm-2 col-form-label">Model:</label>
 				<div class="form-group  col-sm-4">
@@ -45,27 +58,12 @@
 					<p th:each="err : ${#fields.errors('weigth')}" th:text="${err}" /></p>
 				</div>
 			</div>
-			<div class="form-group row ">
-				<label for="powerInput" class="col-sm-2 col-form-label">Volume at 8 bar:</label>
-				<div class="form-group col-sm-4">
-					<input type="text" th:field="*{volumeAt8Bars}" id="volumeAt8Input" class="form-control" />
-					<p th:each="err : ${#fields.errors('volumeAt8Bars')}" th:text="${err}" /></p>
-				</div>
+			
+			<div id="machine-specific-parametars" >
+			
+			
 			</div>
-			<div class="form-group row ">
-				<label for="powerInput" class="col-sm-2 col-form-label">Volume at 10 bar:</label>
-				<div class="form-group col-sm-4">
-					<input type="text" th:field="*{volumeAt10Bars}" id="volumeAt10Input" class="form-control" />
-				<p th:each="err : ${#fields.errors('volumeAt10Bars')}" th:text="${err}" /></p>
-				</div>
-			</div>
-			<div class="form-group row ">
-				<label for="powerInput" class="col-sm-2 col-form-label">Volume at 13 bar:</label>
-				<div class="form-group col-sm-4">
-					<input type="text" th:field="*{volumeAt13Bars}" id="volumeAt13Input" class="form-control" />
-				<p th:each="err : ${#fields.errors('volumeAt13Bars')}" th:text="${err}" /></p>
-				</div>
-			</div>
+			
 			<p>
 				<input type="submit" value="Submit" class="btn btn-primary mb-2" />
 				<input type="reset" value="Reset" class="btn btn-primary mb-2" />
@@ -74,4 +72,33 @@
 	</div>
 	<footer th:replace="fragments/footerFragment :: footer">></footer>
 </body>
+
+<script type="text/javascript">
+$(document).ready(function(){
+ 
+$("#machineType").change('click',function(e){
+ var selectedMachine = $('#machineType').val(); 
+    alert (selectedMachine); 
+    $("#machine-specific-parametars").load(selectedMachine);
+    e.preventDefault()
+    switch(selectedMachine){
+    	case 'SCREW_COMPRESSOR' :
+    		  $("#machine-specific-parametars").load("../screwCompressorAjax.html");
+    		  break;
+    	case 'PISTON_COMPRESSOR' :
+  		  $("#machine-specific-parametars").load("../pistonCompressorAjax.html");
+  		  break;
+    	case 'ADSORPTION_DRYER' :
+  		  $("#machine-specific-parametars").load("../adDryerAjax.html");
+  		  break;  
+  		  
+    	case 'REFRIGERATION_DRYER' :
+  		  $("#machine-specific-parametars").load("../adDryerAjax.html");
+  		  break;  
+    }
+  
+});
+ 
+});
+</script>
 </html>

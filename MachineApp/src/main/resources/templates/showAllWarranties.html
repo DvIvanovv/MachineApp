@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/headFragment :: head">
+
+</head>
+<body>
+	<header th:replace="fragments/navBarFragment :: header"></header>
+	<div class="container">
+		<h1>My warranties</h1>
+		
+		<div class="row justify-content-around " >
+		 <th:block th:each="warranty : ${allWarranties}">
+			<div class="col-lg-4 col-md-6 col-sm-12 breadcrumb justify-content-center"  style="margin: 5px 5px 5px 5px;">
+			<img src="/img/logo.png" class=" float-left" alt="Responsive image" >
+			
+				<ul class="list-group"> 
+					<li class="list-group-item" th:text="'Model: ' + ${warranty.machine}"></li>
+					<li class="list-group-item" th:text="'Serial:Number: ' + ${warranty.serialNumber}"></li>
+					<li class="list-group-item" th:text="'Order date ' + ${#dates.format(warranty.OrderDate, 'dd-MM-yyyy')}"></li>
+				</ul>
+			</div>
+		</th:block>	
+	   </div>
+	</div>
+	<footer th:replace="fragments/footerFragment :: footer">></footer>
+</body>
+</html>

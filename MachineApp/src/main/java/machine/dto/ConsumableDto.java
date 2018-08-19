@@ -6,19 +6,20 @@ import java.util.List;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import machine.data.entities.machines.Machine;
 import machine.data.enums.AccessoryType;
 
 
-public class AccessoryDto {
+public class ConsumableDto {
 
 	private Long id;
 
 	@NotNull
 	private AccessoryType accessoryType;
 	@NotEmpty
-	private List<String> machines;
+	private List<Machine> machines;
 
-	public AccessoryDto() {
+	public ConsumableDto() {
 		super();
 		this.machines = new ArrayList<>();
 	}
@@ -49,13 +50,13 @@ public class AccessoryDto {
 	/**
 	 * @return the machines
 	 */
-	public List<String> getMachines() {
+	public List<Machine> getMachines() {
 		return machines;
 	}
 	/**
 	 * @param machines the machines to set
 	 */
-	public void setMachines(List<String> machines) {
+	public void setMachines(List<Machine> machines) {
 		this.machines = machines;
 	}
 }

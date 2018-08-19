@@ -5,6 +5,9 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
+import machine.data.entities.machines.dryers.AdsorptionDryer;
+import machine.dto.ScrewCompressorDto;
+
 @Entity
 @DiscriminatorValue("Screw")
 public class ScrewCompressor extends Compressor {
@@ -54,6 +57,10 @@ public class ScrewCompressor extends Compressor {
 	 */
 	public void setVolumeAt13Bars(Double volumeAt13Bars) {
 		this.volumeAt13Bars = volumeAt13Bars;
+	}
+	
+	public Class getMappedClass() {
+		return ScrewCompressorDto.class;
 	}
 	
 }

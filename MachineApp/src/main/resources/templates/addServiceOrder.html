@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/headFragment :: head">
+
+</head>
+<body>
+	<header th:replace="fragments/navBarFragment :: header"></header>
+	<div class="container">
+		<h1>Add new Service order: </h1>
+		<form action="#" th:action="@{/serviceOrder/next}" th:object="${serviceOrder}" method="post">
+			<input type="text" th:field="*{id}" th:readonly="true" hidden="true" />	
+			
+			<div class="form-group row ">
+				<label for="machine" class="col-sm-2 col-form-label">For machine:</label>
+				<div class="col-sm-4">
+				 	<select th:multiple="false" class="form-control" id="machine" name="machine" th:field="*{forMachine}">
+						<option th:each="warranty : ${warranties}" th:value="${warranty.serialNumber}" th:text="${warranty.machine} +' - ' + ${warranty.serialNumber}">Model</option>
+					</select>
+				 	<small id="capHelp" class="form-control-feedback" th:each="error : ${#fields.errors('forMachine')}" th:text="${error}">Error Message</small>
+				</div>
+			</div>
+			<div class="form-group row ">
+			<label for="serviceDate" class="col-sm-2 col-form-label" th:field="*{serviceDate}">Service date</label>
+				<div class="form-group col-sm-4">
+					<input type="date" id="serviceDate" name="serviceDate" class="form-control" ><br><br>
+						<small id="capHelp" class="form-control-feedback" th:each="error : ${#fields.errors('serviceDate')}" th:text="${error}">Error Message</small>
+				</div>
+			</div>
+			<p>
+				<input type="submit" value="Submit" class="btn btn-primary mb-2" />
+				<input type="reset" value="Reset" class="btn btn-primary mb-2" />
+			</p>
+		</form>
+	</div>
+	<footer th:replace="fragments/footerFragment :: footer">></footer>
+</body>
+</html>

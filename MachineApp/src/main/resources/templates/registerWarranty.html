@@ -9,12 +9,13 @@
 		<h1>Register warranty for new machine</h1>
 		<form action="#" th:action="@{/register/machine}" th:object="${warranty}"  method="post">
 			<input type="text" th:field="*{id}" th:readonly="true" hidden="true" />	
-			
 			<div class="form-group row ">
-				<label for="orderDate" class="col-sm-2 col-form-label">Order date</label>
-				<input type="date" id="orderDate" name="orderDate" ><br><br>
+			<label for="orderDate" class="col-sm-2 col-form-label">Order date</label>
+				<div class="form-group col-sm-4">
+					<input type="date" th:field="*{orderDate}"id="orderDate" name="orderDate" class="form-control" ><br><br>
+					<p th:each="err : ${#fields.errors('orderDate')}" th:text="${err}" /></p>
+				</div>
 			</div>
-			
 			<div class="form-group row ">
 				<label for="powerInput" class="col-sm-2 col-form-label">Serial number:</label> 
 				<div class="form-group col-sm-4">
@@ -22,13 +23,15 @@
 					<p th:each="err : ${#fields.errors('serialNumber')}" th:text="${err}" /></p>
 				</div>
 			</div>
-			
-			<div class="form-group col-sm-6">
-				<label for="machines" class="col-sm-4 col-form-label">For machines</label> 
-				<select th:multiple="false" class="form-control" id="machines" name="machines" th:field="*{machine}">
-					<option th:each="machine : ${machines}" th:value="${machine.model}" th:text="${machine.model}">Option 1</option>
-				</select> 
-				<small id="capHelp" class="form-control-feedback" th:each="error : ${#fields.errors('machine')}" th:text="${error}">Error Message</small>
+			<div class="form-group row ">
+				<label for="machines" class="col-sm-2 col-form-label">For machines:</label> 
+				<div class="form-group col-sm-4">
+					<select th:multiple="false" class="form-control" id="machines" name="machines" th:field="*{machine}">
+						<option th:each="machine : ${allMachines}" th:value="${machine}" th:text="${machine}">Option 1</option>
+					</select> 
+					<small id="capHelp" class="form-control-feedback" th:each="error : ${#fields.errors('machine')}" th:text="${error}">Error Message</small>
+					<p th:each="err : ${#fields.errors('machine')}" th:text="${err}" /></p>
+				</div>
 			</div>
 			<p>
 				<input type="submit" value="Submit" class="btn btn-primary mb-2" />

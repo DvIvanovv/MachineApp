@@ -10,7 +10,7 @@ import machine.data.enums.AccessoryType;
 
 @Entity   
 @Table(name="accessories")
-public class Accessory {
+public class Consumable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,13 +18,13 @@ public class Accessory {
 
 	@Column(name = "accessory_type")
 	private AccessoryType accessoryType;
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany(cascade = CascadeType.PERSIST,fetch=FetchType.EAGER)
 	@JoinTable(name = "accessory_machine")
 	private List<Machine> machines;
 
 
 
-	public Accessory() {
+	public Consumable() {
 		super();
 		this.machines = new ArrayList<>();
 	}

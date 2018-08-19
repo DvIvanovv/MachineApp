@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "service_orders")
 public class ServiceOrder {
@@ -15,23 +17,25 @@ public class ServiceOrder {
 	private Long id;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "machinearanty_id", referencedColumnName = "id")
-	private Warranty waranty;
+	@JoinColumn(name = "machineWarranty_id", referencedColumnName = "id")
+	private Warranty warranty;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(name = "service_order_accessories")
-	List<Accessory> accsesories ;
+	List<Consumable> accessories ;
 	@Column(name = "service_date")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date serviceDate;
 
 
 
 	public ServiceOrder() {
 		super();
-		this.accsesories = new ArrayList<>();
+		this.accessories = new ArrayList<>();
 	}
 
 	/**
@@ -52,24 +56,24 @@ public class ServiceOrder {
 	/**
 	 * @return the accsesories
 	 */
-	public List<Accessory> getAccsesories() {
-		return accsesories;
+	public List<Consumable> getAccsesories() {
+		return accessories;
 	}
 	/**
 	 * @param accsesories the accsesories to set
 	 */
-	public void setAccsesories(List<Accessory> accsesories) {
-		this.accsesories = accsesories;
+	public void setAccsesories(List<Consumable> accsesories) {
+		this.accessories = accsesories;
 	}
 
 
 
-	public Warranty getWaranty() {
-		return waranty;
+	public Warranty getWarranty() {
+		return warranty;
 	}
 
-	public void setWaranty(Warranty waranty) {
-		this.waranty = waranty;
+	public void setWarranty(Warranty waranty) {
+		this.warranty = waranty;
 	}
 
 

@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/headFragment :: head">
+
+</head>
+<body>
+			<div class="form-group row ">
+				<label for="powerInput" class="col-sm-2 col-form-label">Volumetric flow rate:</label>
+				<div class="form-group col-sm-4">
+				 	<input type="text" th:field="*{volumetricFlowRate}" id="volumetricFlowRate" class="form-control" />
+					<p th:each="err : ${#fields.errors('volumetricFlowRate')}" th:text="${err}" /></p>
+				</div>
+			</div>
+			<div class="form-group row ">
+				<label for="powerInput" class="col-sm-2 col-form-label">Compressed air connection:</label>
+				<div class="form-group col-sm-4">
+					<input type="text" th:field="*{compressedAirConnection}" id="compressedAirConnection" class="form-control" />
+					<p th:each="err : ${#fields.errors('compressedAirConnection')}"	th:text="${err}" /></p>
+				</div>
+			</div>
+</body>
+</html>

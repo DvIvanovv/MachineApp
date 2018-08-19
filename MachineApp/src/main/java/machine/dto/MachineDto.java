@@ -1,15 +1,17 @@
 package machine.dto;
 
+import javax.persistence.Id;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+
 import machine.data.entities.Warranty;
 import machine.data.enums.MachineType;
 
 public class MachineDto {
-	
+	@Id
 	protected Long id;
 
 	protected String machineIdentifier;

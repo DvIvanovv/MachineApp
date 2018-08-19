@@ -6,7 +6,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import machine.data.entities.machines.Machine;
+import machine.dto.MachineDto;
 @Entity
 @Table(name = "waranties")
 public class Warranty {
@@ -18,7 +21,7 @@ public class Warranty {
 	private Date orderDate;
 	@Column(name = "is_active")
 	private boolean isActive = true;
-	@Column(name = "serial_number")
+	@Column(name = "serial_number", unique=true)
 	@NotBlank
 	@Size(min = 10, max = 10)
 	private String serialNumber;
@@ -30,6 +33,7 @@ public class Warranty {
 	@Column(name="is_approved")
 	private boolean isApproved = false;
 
+	
 	/**
 	 * @return the id
 	 */
@@ -78,10 +82,11 @@ public class Warranty {
 	public void setMachine(Machine machine) {
 		this.machine = machine;
 	}
-	public boolean isApproved() {
+	
+	public boolean getIsApproved() {
 		return isApproved;
 	}
-	public void setApproved(boolean isApproved) {
+	public void setIsApproved(boolean isApproved) {
 		this.isApproved = isApproved;
 	}
 	/**

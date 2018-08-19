@@ -1,5 +1,6 @@
 package machine.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -73,7 +74,57 @@ public class UserServiceImpl implements UserService {
 			System.out.println("password: " + user1.getPassword());
 		}
 		return user;
-		
 	}
 
+	@Override
+	public User findByUsername(String username) {
+		return this.userRepository.findByUsername(username);
+	}
+
+	@Override
+	public List<UserDto> getAllUsers() {
+		List<User> users = (List<User>)this.userRepository.findAll();
+		List<UserDto> result = new ArrayList<>();
+		for(User u : users) {
+			UserDto user = modelMapper.map(u, UserDto.class);
+			result.add(user);
+		}
+		return result;
+	}
+	
+	
+	@Override
+	public String addRole(String username) {
+		if(!this.isManager(username)) {
+			AuthGroup role = new AuthGroup();
+			role.setUsername(username);
+			role.setAuthGroup("MANAGER");
+			this.authGroupRepository.save(role);
+			return  username + " is now manager.";
+		}
+		return username + "is awready manager.";
+	}
+
+	
+	@Override
+	public String removeRole(String username) {
+		if(this.isManager(username)) {
+			AuthGroup role= this.authGroupRepository
+					.findByUsernameAndAuthGroup(username, "MANAGER");
+			this.authGroupRepository.delete(role);
+			return  username + " is now user.";
+		}
+		return  username + " is awready st a user.";
+	}
+
+	private boolean isManager(String username) {
+		List<AuthGroup> roles = this.authGroupRepository.findByUsername(username);
+		
+		for(AuthGroup role : roles) {
+			if(role.getAuthGroup().equals("MANAGER")) {
+				return true;
+			}
+		}
+		return false;		
+	}
 }

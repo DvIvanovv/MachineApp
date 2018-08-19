@@ -1,11 +1,15 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments/headFragment :: head">
 </head>
 <body>
 	<header th:replace="fragments/navBarFragment :: header"></header>
 	<div class="container">
-		<h1>Hi</h1>
+		<main>
+		<div th:text="${ipAddress}" sec:authorize="hasRole('ROLE_ADMIN')"></div>
+		<div th:text="|Page Clicked: ${counter}|" sec:authorize="hasRole('ROLE_ADMIN')"></div>
+		</main>
 	</div>
 	
 	<footer th:replace="fragments/footerFragment :: footer">></footer>

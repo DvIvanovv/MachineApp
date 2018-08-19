@@ -1,16 +1,26 @@
 package machine.data.entities.machines;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import machine.data.entities.Consumable;
+import machine.data.entities.machines.dryers.AdsorptionDryer;
 import machine.data.enums.MachineType;
 
 @Entity
@@ -43,6 +53,21 @@ public class Machine {
 	protected MachineType machineType;
 	@Basic
 	protected byte[] image;
+	@ManyToMany(mappedBy="machines", fetch=FetchType.EAGER)
+	private List<Consumable> consumables;
+	
+	
+	public List<Consumable> getConsumables() {
+		return consumables;
+	}
+	public void setConsumables(List<Consumable> consumables) {
+		this.consumables = consumables;
+	}
+	public Machine() {
+		super();
+		this.consumables = new ArrayList<>();
+		// TODO Auto-generated constructor stub
+	}
 	/**
 	 * @return the id
 	 */
@@ -126,5 +151,9 @@ public class Machine {
 	}
 	public void setImage(byte[] image) {
 		this.image = image;
+	}
+	
+	public Class getMappedClass() {
+		return null;
 	}
 }

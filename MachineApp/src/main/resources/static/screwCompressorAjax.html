@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/headFragment :: head">
+
+</head>
+<body>
+			<div class="form-group row ">
+				<label for="powerInput" class="col-sm-2 col-form-label">Volume at 8 bar:</label>
+				<div class="form-group col-sm-4">
+					<input type="text" th:field="*{volumeAt8Bars}" id="volumeAt8Input" class="form-control" />
+					<p th:each="err : ${#fields.errors('volumeAt8Bars')}" th:text="${err}" /></p>
+				</div>
+			</div>
+			<div class="form-group row ">
+				<label for="powerInput" class="col-sm-2 col-form-label">Volume at 10 bar:</label>
+				<div class="form-group col-sm-4">
+					<input type="text" th:field="*{volumeAt10Bars}" id="volumeAt10Input" class="form-control" />
+				<p th:each="err : ${#fields.errors('volumeAt10Bars')}" th:text="${err}" /></p>
+				</div>
+			</div>
+			<div class="form-group row ">
+				<label for="powerInput" class="col-sm-2 col-form-label">Volume at 13 bar:</label>
+				<div class="form-group col-sm-4">
+					<input type="text" th:field="*{volumeAt13Bars}" id="volumeAt13Input" class="form-control" />
+				<p th:each="err : ${#fields.errors('volumeAt13Bars')}" th:text="${err}" /></p>
+				</div>
+				
+			</div>	
+</body>
+</html>

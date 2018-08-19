@@ -5,23 +5,25 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
-import machine.data.entities.Accessory;
+import machine.data.entities.Consumable;
 import machine.data.entities.machines.Machine;
+import machine.data.enums.AccessoryType;
 import machine.data.repository.AccessoryRepository;
-import machine.dto.AccessoryDto;
-import machine.services.AccessoryService;
+import machine.dto.ConsumableDto;
+import machine.services.ConsumableService;
 import machine.services.MachineService;
 
 @Service
-public class AccessoryServiceImpl implements AccessoryService{
+public class ConsumableServiceImpl implements ConsumableService{
 
 	private AccessoryRepository accessoryRepository;
 	private ModelMapper modelMapper;
 	private MachineService machineService;
 	@Autowired
-	public AccessoryServiceImpl(AccessoryRepository accessoryRepository,  ModelMapper modelMapper, MachineService machineService) {
+	public ConsumableServiceImpl(AccessoryRepository accessoryRepository,  ModelMapper modelMapper, MachineService machineService) {
 		super();
 		this.accessoryRepository = accessoryRepository;
 		this.modelMapper = modelMapper;
@@ -33,20 +35,27 @@ public class AccessoryServiceImpl implements AccessoryService{
 	 * @see machine.services.AccessoryService#addAccessory(machine.dto.AccessoryDto)
 	 */
 	@Override
-	public void addAccessory(AccessoryDto accessoryDto) {
+	public void addAccessory(ConsumableDto accessoryDto) {
 		
-		Accessory accessory = modelMapper.map(accessoryDto, Accessory.class);
-		List<Machine> machines = new ArrayList<>();
-		for(String machine : accessoryDto.getMachines()) {
-			if(this.machineService.findByModel(machine)!= null) {
-				machines.add(this.machineService.findByModel(machine));
-			}
-		}
-		accessory.setMachines(machines);
+		Consumable accessory = modelMapper.map(accessoryDto, Consumable.class);
 		this.accessoryRepository.save(accessory);
-
-
 	}
+
+
+	@Override
+	public Consumable findByType(AccessoryType type) {
+		
+		return this.accessoryRepository.findByAccessoryType(type);
+	}
+
+
+//	@Override
+//	public List<Accessory> findAllByModel(Machine machine) {
+//		this.accessoryRepository.findAllByMachines(machine);
+//		return null;
+//	}
+	
+	
 
 
 

@@ -2,13 +2,21 @@ package machine.dto;
 
 import java.util.Date;
 
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class RegisterMachineDto {
+import org.springframework.format.annotation.DateTimeFormat;
 
+public class WarrantyDto {
+	@Id
 	private Long id;
-	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@NotNull
 	private Date orderDate;
 
 	private boolean isActive = true;
@@ -16,12 +24,12 @@ public class RegisterMachineDto {
 	@NotBlank
 	@Size(min = 10, max = 10)
 	private String serialNumber;
-	@NotBlank
+	@NotNull
 	private String machine;
 	private String username;
-	
 	private boolean isApproved = false;
 
+	
 	/**
 	 * @return the id
 	 */
@@ -107,19 +115,13 @@ public class RegisterMachineDto {
 		this.isApproved = isApproved;
 	}
 
-	/**
-	 * @return the username
-	 */
 	public String getUsername() {
 		return username;
 	}
 
-	/**
-	 * @param username the username to set
-	 */
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+
 	
 }

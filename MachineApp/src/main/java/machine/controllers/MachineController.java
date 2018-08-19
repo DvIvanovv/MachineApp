@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import machine.data.enums.MachineType;
 import machine.dto.AdDryerDto;
+import machine.dto.Machine1Dto;
+import machine.dto.MachineDto;
 import machine.dto.PistonCompressorDto;
 import machine.dto.RfDryerDto;
 import machine.dto.ScrewCompressorDto;
@@ -32,16 +34,52 @@ public class MachineController {
 	}
 	
 	@GetMapping("/add")
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN', 'ROLE_MANAGER')")
 	public ModelAndView getAddMachineForm(ModelAndView modelAndView) {
 		modelAndView.addObject("machineType", new String());
 		modelAndView.setViewName("addMachine");
 		return modelAndView;
 	}
+	@GetMapping("/add1")
+	@PreAuthorize("hasRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+	public ModelAndView getAddMachineForm1(ModelAndView modelAndView) {
+		modelAndView.addObject("machine", new Machine1Dto());
+		modelAndView.setViewName("addMachineAjax");
+		return modelAndView;
+	}
+	@PostMapping("/add1")
+	public ModelAndView addMachine(@Valid @ModelAttribute ("machine") Machine1Dto machine, BindingResult bindingResult, ModelAndView modelAndView) {	
+		if(bindingResult.hasErrors()) {
+			modelAndView.addObject("machine", machine);
+			modelAndView.setViewName("addMachineAjax");
+			return modelAndView;
+		}
+		switch(machine.getMachineType().name()) {
+		case "SCREW_COMPRESSOR" : 
+				if(machine.getVolumeAt10Bars() == 0.0 || machine.getVolumeAt10Bars() == 0.0 ||
+				machine.getVolumeAt13Bars() == 0.0) {
+					modelAndView.addObject("machine", machine);
+					modelAndView.setViewName("addMachineAjax");
+					return modelAndView;
+				}
+				this.machineService.addMachine(machine);
+			break;
+		case "PISTON_COMPRESSOR" : 
+			break;
+		case "ADSORPTION_DRYER" : 
+			break;
+		case "REFRIGERATION_DRYER" : 
+			break;
+			default:
+				break;
+		}
+		return null;
+		
+	}
 
 
 	@GetMapping("/add/SCREW_COMPRESSOR")
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN', 'ROLE_MANAGER')")
 		//@GetMapping("/edit/{type}") @PathVariable String machineType
 	public ModelAndView getAddScrewCompressorForm(ModelAndView modelAndView) {
 		modelAndView.addObject("machine", new ScrewCompressorDto());
@@ -50,7 +88,7 @@ public class MachineController {
 	}
 	
 	@PostMapping("/add/SCREW_COMPRESSOR")
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN', 'ROLE_MANAGER')")
 	public ModelAndView AddScrewCompressor(@Valid @ModelAttribute ("machine") ScrewCompressorDto machine, BindingResult bindingResult, ModelAndView modelAndView) {
 		if(bindingResult.hasErrors()) {
 			modelAndView.addObject("machine", machine);
@@ -63,7 +101,7 @@ public class MachineController {
 	}
 
 	@GetMapping("/add/PISTON_COMPRESSOR")
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN', 'ROLE_MANAGER')")
 	public ModelAndView getAddPistonCompressorForm(ModelAndView modelAndView) {
 		modelAndView.addObject("machine", new PistonCompressorDto());
 		modelAndView.setViewName("addPiston");
@@ -71,7 +109,7 @@ public class MachineController {
 	}
 	
 	@PostMapping("/add/PISTON_COMPRESSOR")
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN', 'ROLE_MANAGER')")
 	public ModelAndView AddPistonCompressor(@Valid @ModelAttribute ("machine") PistonCompressorDto machine, BindingResult bindingResult, ModelAndView modelAndView) {
 		if(bindingResult.hasErrors()) {
 			modelAndView.addObject("machine", machine);
@@ -85,7 +123,7 @@ public class MachineController {
 	}
 
 	@GetMapping("/add/ADSORPTION_DRYER")
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN', 'ROLE_MANAGER')")
 	public ModelAndView getAddAdDryerForm(ModelAndView modelAndView) {
 		modelAndView.addObject("machine", new AdDryerDto());
 		modelAndView.setViewName("addAdsorption");
@@ -93,7 +131,7 @@ public class MachineController {
 	}
 	
 	@PostMapping("/add/ADSORPTION_DRYER")
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN', 'ROLE_MANAGER')")
 	public ModelAndView AddAdDryer(@Valid @ModelAttribute ("machine") AdDryerDto machine, BindingResult bindingResult, ModelAndView modelAndView) {
 		if(bindingResult.hasErrors()) {
 			modelAndView.addObject("machine", machine);
@@ -107,7 +145,7 @@ public class MachineController {
 	}
 	
 	@GetMapping("/add/REFRIGERATION_DRYER")
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN', 'ROLE_MANAGER')")
 	public ModelAndView getFfdAdDryerForm(ModelAndView modelAndView) {
 		modelAndView.addObject("machine", new RfDryerDto());
 		modelAndView.setViewName("addRefrigeneration");
@@ -115,7 +153,7 @@ public class MachineController {
 	}
 	
 	@PostMapping("/add/REFRIGERATION_DRYER")
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN', 'ROLE_MANAGER')")
 	public ModelAndView AddRfDryer(@Valid @ModelAttribute ("machine") RfDryerDto machine, BindingResult bindingResult, ModelAndView modelAndView) {
 		if(bindingResult.hasErrors()) {
 			modelAndView.addObject("machine", machine);

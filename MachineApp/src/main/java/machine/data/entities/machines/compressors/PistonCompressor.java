@@ -5,6 +5,9 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
+import machine.data.entities.machines.dryers.AdsorptionDryer;
+import machine.dto.PistonCompressorDto;
+
 @Entity
 @DiscriminatorValue("Piston")
 public class PistonCompressor extends Compressor {
@@ -27,6 +30,8 @@ public class PistonCompressor extends Compressor {
 	public void setNumberOfstage(short numberOfstage) {
 		this.numberOfstage = numberOfstage;
 	}
-	
+	public Class getMappedClass() {
+		return PistonCompressorDto.class;
+	}
 	
 }

@@ -9,4 +9,5 @@ import machine.data.entities.AuthGroup;
 public interface AuthGroupRepository extends JpaRepository<AuthGroup, Long>{
 
 	List<AuthGroup> findByUsername(String username);
+	AuthGroup findByUsernameAndAuthGroup(String username, String authGroup);
 }
