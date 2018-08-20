@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/headFragment :: head">
+
+</head>
+<body>
+	<header th:replace="fragments/navBarFragment :: header"></header>
+	<div class="container">
+		<h1>Sold machines compare</h1>
+		<p th:text="${model1}"></p>
+		<p th:text="${model2}"></p>
+	</div>
+	<footer th:replace="fragments/footerFragment :: footer">></footer>
+</body>
+</html>

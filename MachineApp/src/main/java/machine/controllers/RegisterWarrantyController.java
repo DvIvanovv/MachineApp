@@ -3,6 +3,8 @@ package machine.controllers;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -15,8 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import machine.data.entities.machines.Machine;
-import machine.dto.MachineDto;
+
 import machine.dto.WarrantyDto;
 import machine.services.MachineService;
 import machine.services.RgisterWarrantyService;
@@ -74,6 +75,24 @@ public class RegisterWarrantyController {
 		Principal principal = request.getUserPrincipal();
 		model.addAttribute("allWarranties", this.registerMachineService.findAllByUser(principal.getName())) ;
 		return "showAllWarranties";
+	}
+	@GetMapping("/warranties/soldMachines")
+	public String showSoldMachineForm(Model model) {
+		
+		model.addAttribute("model1", new String()) ;
+		model.addAttribute("model2", new String()) ;
+		return "showCompareSoldForm";
+	}
+	@PostMapping("/warranties/soldMachines")
+	public String showSoldMachine(@ModelAttribute ("model1") String modelOne, 
+			@ModelAttribute ("model2") String modelTwo, BindingResult bindingResult, Model model) throws InterruptedException, ExecutionException {
+		
+		 CompletableFuture<String> firstModel = this.registerMachineService.countMachineSales(modelOne);
+		 CompletableFuture<String> secondModel = this.registerMachineService.countMachineSales(modelTwo);
+		 CompletableFuture.allOf(firstModel, secondModel).join();
+		 model.addAttribute("model1", firstModel.get());
+		 model.addAttribute("model2", secondModel.get());
+		return "showCompareSold";
 	}
 	
 	@ModelAttribute("allMachines")

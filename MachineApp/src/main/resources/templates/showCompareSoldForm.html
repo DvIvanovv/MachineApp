@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/headFragment :: head">
+
+</head>
+<body>
+	<header th:replace="fragments/navBarFragment :: header"></header>
+	<div class="container">
+		<h1>Sold machines compare</h1>
+		<form action="#" th:action="@{/warranties/soldMachines}" th:object="${model1}"  th:modelAttribute="allMachines" method="post">
+			<div class="form-group-row ">
+				<label for="model1" class="col-sm-2 col-form-label">Model 1:</label>
+				<div class="col-sm-4">
+				 	<select th:multiple="false" class="form-control" id="model1" name="model1" th:object="${model1}">
+						<option th:each="machine : ${allMachines}" th:value="${machine}" th:text="${machine}">Model</option>
+					</select>	
+				</div>
+			</div>
+		 	<div class="form-group-row " th:object="${model2}">
+				<label for="model2" class="col-sm-2 col-form-label">Model 2:</label>
+				<div class="col-sm-4">
+				 	<select th:multiple="false" class="form-control" id="model2" name="model2" th:object="${model2}">
+						<option th:each="machine : ${allMachines}" th:value="${machine}" th:text="${machine}">Model</option>
+					</select>	
+				</div>
+			</div>
+			<p>
+				<input type="submit" value="Submit" class="btn btn-primary mb-2" />
+				<input type="reset" value="Reset" class="btn btn-primary mb-2" />
+			</p>
+		</form>
+	</div>
+	<footer th:replace="fragments/footerFragment :: footer">></footer>
+</body>
+</html>

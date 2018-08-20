@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.DateUtils;
 
@@ -96,7 +98,11 @@ public class RegisterWarrantyServiceImpl implements RgisterWarrantyService {
 		this.registerWarrantyRepository.save(warranty);
 		
 	}
-	
-	
+	@Override
+	@Async
+	public CompletableFuture<String> countMachineSales(String machineModel) {
+		List<Warranty> result = this.registerWarrantyRepository.findAllByMachineModel(machineModel);
+		return CompletableFuture.completedFuture("MAchine model: " + machineModel + "is sold " + result.size() + "times");
+	}
 		
 }

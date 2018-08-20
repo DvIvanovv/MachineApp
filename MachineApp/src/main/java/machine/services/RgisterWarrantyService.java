@@ -1,6 +1,7 @@
 package machine.services;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.stereotype.Service;
 
@@ -19,4 +20,5 @@ public interface RgisterWarrantyService {
 	public boolean isSerialNumberExists(String serialNumber);
 	public List<Warranty> getAllWarranties();
 	public void approvedWarranty(Warranty warranty);
+	public CompletableFuture<String> countMachineSales(String machineModel) ;
 }

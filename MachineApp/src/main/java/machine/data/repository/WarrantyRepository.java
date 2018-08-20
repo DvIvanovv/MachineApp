@@ -14,5 +14,5 @@ public interface WarrantyRepository extends CrudRepository<Warranty, Long>{
 
 	Warranty findBySerialNumber(String serialNumber);
 	
-	
+	List<Warranty> findAllByMachineModel(String model);
 }

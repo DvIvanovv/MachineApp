@@ -99,11 +99,12 @@ public class ServiceOrderController {
 		return "redirect:/serviceOrder/all";
 	}
 	@GetMapping("/all")
-	private String showAllServiceOrders(Model model,HttpServletRequest request) {
+	public String showAllServiceOrders(Model model,HttpServletRequest request) {
 		Principal principal = request.getUserPrincipal();
 		model.addAttribute("allServiceOrders",this.serviceOrderService.getAllServiceOrdersByUser(principal.getName()));
 		return "showAllServiceOrders";
 	}
+
 	
 	@ModelAttribute("warranties")
 	public List<WarrantyDto> warranties(HttpServletRequest request){
