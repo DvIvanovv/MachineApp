@@ -1,13 +1,9 @@
 package machine.controllers;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,13 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
 import machine.dto.WarrantyDto;
 import machine.data.entities.Consumable;
-import machine.data.enums.ConsumableType;
 import machine.dto.ServiceOrderDto;
-import machine.services.ConsumableService;
-import machine.services.MachineService;
 import machine.services.RgisterWarrantyService;
 import machine.services.UserService;
 import machine.services.impl.ServiceOrderServiceImpl;
@@ -34,21 +26,16 @@ import machine.services.impl.ServiceOrderServiceImpl;
 public class ServiceOrderController {
 	
 	private ServiceOrderServiceImpl serviceOrderService;
-	private MachineService machineService;
 	private RgisterWarrantyService warrantyService;
 	private UserService  userService;
-	private ConsumableService consumableService;
 	
 	@Autowired
-	public ServiceOrderController(MachineService machineService,
-			ServiceOrderServiceImpl serviceOrderService, RgisterWarrantyService warrantyService,
-			UserService  userService,ConsumableService consumableService) {
+	public ServiceOrderController( ServiceOrderServiceImpl serviceOrderService, RgisterWarrantyService warrantyService,
+			UserService  userService) {
 		super();
 		this.serviceOrderService = serviceOrderService;
 		this.warrantyService = warrantyService;
-		this.machineService = machineService;
 		this.userService = userService;
-		this.consumableService = consumableService;
 	}
 
 
@@ -82,13 +69,6 @@ public class ServiceOrderController {
 			model.addAttribute("serviceOrder", serviceOrder);
 			return "addServiceOrder";
 		}
-//		List<Consumable> consumables = new ArrayList<>();
-//		for(String s : serviceOrder.getConsumables()) {
-//			ConsumableType val =ConsumableType.valueOf(s);
-//			Consumable con = this.consumableService.findByMachineAndType(serviceOrder.getForMachine(), val);//findByType(val);
-//			consumables.add(con);
-//		}
-		//serviceOrder.getConsumables().stream().forEach(c-> consumables.add(this.consumableService.findByType(ConsumableType.valueOf(c))));
 		try {
 			serviceOrderService.addServiceOrder(serviceOrder);	
 		} catch( IllegalArgumentException e) {
@@ -98,19 +78,20 @@ public class ServiceOrderController {
 		}
 		return "redirect:/serviceOrder/my";
 	}
+	
 	@GetMapping("/my")
 	public String showAllMyServiceOrders(Model model,HttpServletRequest request) {
 		Principal principal = request.getUserPrincipal();
 		model.addAttribute("allServiceOrders",this.serviceOrderService.getAllServiceOrdersByUser(principal.getName()));
 		return "showAllServiceOrders";
 	}
+	
 	@GetMapping("/all")
 	public String showAllServiceOrders(Model model) {
 		
 		model.addAttribute("allServiceOrders",this.serviceOrderService.getAllServiceOrders());
 		return "showAllServiceOrders";
 	}
-
 	
 	@ModelAttribute("warranties")
 	public List<WarrantyDto> warranties(HttpServletRequest request){

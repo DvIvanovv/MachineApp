@@ -47,46 +47,42 @@ public class RegisterWarrantyController {
 		if(bindingResult.hasErrors()) {
 			return "registerWarranty";
 		}
-		   Principal principal = request.getUserPrincipal();
-	       String username = principal.getName();
-	       registerMachine.setUsername(username);
-	       
-	       try {
-	    	   this.registerMachineService.registerWarranty(registerMachine);
-			} catch (IllegalArgumentException e) {
-				if(e.getMessage().startsWith("Regis")) {
-					bindingResult.rejectValue("orderDate","404", e.getMessage());
-					model.addAttribute("warranty", registerMachine);
-				}
-				else {
-					bindingResult.rejectValue("serialNumber","404", e.getMessage());
-					model.addAttribute("warranty", registerMachine);
-				}
-			
-				return "registerWarranty";
+		Principal principal = request.getUserPrincipal();
+	    String username = principal.getName();
+	    registerMachine.setUsername(username);   
+	    try {
+	  	   this.registerMachineService.registerWarranty(registerMachine);
+		} catch (IllegalArgumentException e) {
+			if(e.getMessage().startsWith("Regis")) {
+				bindingResult.rejectValue("orderDate","404", e.getMessage());
+				model.addAttribute("warranty", registerMachine);
 			}
-
-	       
-	       return "redirect:/warranties/all";
-		
+			else {
+				bindingResult.rejectValue("serialNumber","404", e.getMessage());
+				model.addAttribute("warranty", registerMachine);
+			}			
+			return "registerWarranty";
+		}   
+	    return "redirect:/warranties/all";
 	}
+	
 	@GetMapping("/warranties/all")
 	public String showAllWarranties(Model model, HttpServletRequest request) {
 		Principal principal = request.getUserPrincipal();
 		model.addAttribute("allWarranties", this.registerMachineService.findAllByUser(principal.getName())) ;
 		return "showAllWarranties";
 	}
+	
 	@GetMapping("/warranties/soldMachines")
-	public String showSoldMachineForm(Model model) {
-		
+	public String showSoldMachineForm(Model model) {	
 		model.addAttribute("model1", new String()) ;
 		model.addAttribute("model2", new String()) ;
 		return "showCompareSoldForm";
 	}
+	
 	@PostMapping("/warranties/soldMachines")
 	public String showSoldMachine(@ModelAttribute ("model1") String modelOne, 
-			@ModelAttribute ("model2") String modelTwo, BindingResult bindingResult, Model model) throws InterruptedException, ExecutionException {
-		
+			@ModelAttribute ("model2") String modelTwo, BindingResult bindingResult, Model model) throws InterruptedException, ExecutionException {	
 		 CompletableFuture<String> firstModel = this.registerMachineService.countMachineSales(modelOne);
 		 CompletableFuture<String> secondModel = this.registerMachineService.countMachineSales(modelTwo);
 		 CompletableFuture.allOf(firstModel, secondModel).join();

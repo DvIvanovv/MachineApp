@@ -12,6 +12,8 @@ import machine.data.enums.MachineType;
 public interface MachineRepository extends CrudRepository<Machine, Long> {
 
 	List<Machine> findAllByMachineType(MachineType machineType);
+	
 	List<Machine> findAllByMachineIdentifierIn(List<String> types);
+	
 	Machine findByModel(String model);
 }

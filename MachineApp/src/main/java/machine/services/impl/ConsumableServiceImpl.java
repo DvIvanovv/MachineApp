@@ -1,13 +1,10 @@
 package machine.services.impl;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import machine.data.entities.Consumable;
@@ -16,20 +13,17 @@ import machine.data.enums.ConsumableType;
 import machine.data.repository.ConsumableRepository;
 import machine.dto.ConsumableDto;
 import machine.services.ConsumableService;
-import machine.services.MachineService;
 
 @Service
 public class ConsumableServiceImpl implements ConsumableService{
 
 	private ConsumableRepository consumableRepository;
 	private ModelMapper modelMapper;
-	private MachineService machineService;
 	@Autowired
-	public ConsumableServiceImpl(ConsumableRepository consumableRepository,  ModelMapper modelMapper, MachineService machineService) {
+	public ConsumableServiceImpl(ConsumableRepository consumableRepository,  ModelMapper modelMapper) {
 		super();
 		this.consumableRepository = consumableRepository;
 		this.modelMapper = modelMapper;
-		this.machineService =  machineService;
 	}
 
 
@@ -57,20 +51,7 @@ public class ConsumableServiceImpl implements ConsumableService{
 		}
 		Consumable consumable = modelMapper.map(consumableDto, Consumable.class);
 		this.consumableRepository.save(consumable);
-//		consumable.setMachines(consumable
-//				.getMachines()
-//				.stream()
-//				.filter(m -> m.getConsumables()
-//						.stream()
-//						.noneMatch(c-> c.getConsumableType().equals(consumable.getConsumableType()))).collect(Collectors.toList()));
-		
-//		if(consumable.getMachines().size() > 0) {
-//			this.consumableRepository.save(consumable);
-//			consumableDto.getMachines().clear();
-//			consumableDto.setMachines(consumable.getMachines());
-			return true;
-//		}		
-//		return false;
+		return true;
 	}
 
 
@@ -79,21 +60,6 @@ public class ConsumableServiceImpl implements ConsumableService{
 		
 		return this.consumableRepository.findByConsumableType(type);
 	}
-
-
-	@Override
-	public Consumable findByMachineAndType(Long machineId, ConsumableType type) {
-		
-		return this.consumableRepository.findByTypeAndMachine(machineId, type);
-	}
-	
-	
-
-//	@Override
-//	public List<Consumable> findAllByModel(Machine machine) {
-//		this.consumableRepository.findAllByMachines(machine);
-//		return null;
-//	}
 	
 	private boolean isConsumableExist(String name) {
 		if(this.consumableRepository.findByName(name) != null) {

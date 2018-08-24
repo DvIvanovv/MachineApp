@@ -4,7 +4,6 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 import machine.dto.AdDryerDto;
-import machine.dto.PistonCompressorDto;
 
 @Entity
 @DiscriminatorValue("Adsorbtion")

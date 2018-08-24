@@ -8,19 +8,32 @@
 	<div class="container">
 		
 		<div class="row justify-content-around " style="margin-top:50px;" >
-		<div class="col-lg-4 col-md-6 col-sm-12 breadcrumb justify-content-center"  style="margin: 5px 5px 5px 5px;">
-			<img src="/img/logo.png" class=" float-left" alt="Responsive image" >
+			<div class="col-lg-4 col-md-6 col-sm-12 breadcrumb justify-content-center"  style="margin: 5px 5px 5px 5px;">
+				<img src="/img/logo.png" class=" float-left" alt="Responsive image" >
 			</div>
 		
-			<div class="col-lg-4 col-md-6 col-sm-12 breadcrumb justify-content-center"  style="margin: 5px 5px 5px 5px;">
-			<img src="/img/logo.png" class=" float-left" alt="Responsive image" >
+			<div class="col-lg-4 col-md-6 col-sm-12 breadcrumb justify-content-center "  style="margin: 5px 5px 5px 5px;">
+				<img src="/img/logo.png" class=" float-left" alt="Responsive image" >
 			</div>
-			</div>
+			<div class="d-block  bg-primary text-white col-lg-4 col-md-6 col-sm-12 breadcrumb justify-content-center" style="margin: 100px 5px 5px 5px;" th:text="${ipAddress}" sec:authorize="hasRole('ROLE_ADMIN')"></div>
+			<div class="d-block  bg-dark text-white col-lg-4 col-md-6 col-sm-12 breadcrumb justify-content-center" style="margin: 100px 5px 5px 5px;" th:text="|Page Clicked: ${counter}|" sec:authorize="hasRole('ROLE_ADMIN')"></div>
+		</div>
 			
-		<div th:text="${ipAddress}" sec:authorize="hasRole('ROLE_ADMIN')"></div>
-		<div th:text="|Page Clicked: ${counter}|" sec:authorize="hasRole('ROLE_ADMIN')"></div>
+		<div class="row justify-content-around " style="margin-top:50px;" >
+			<button class="btn btn-secondary text-white col-lg-4 col-md-6 col-sm-12  justify-content-center" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER', 'ROLE_MANAGER')" style="margin: 5px 5px 5px 5px;">Emergency contact</button>
+		</div>
+		<div class="row justify-content-around " style="margin-top:50px;" >
+		<div id="contacts" class="col-lg-8 col-md-6 col-sm-12  justify-content-center "></div>
+		</div>
 	</div>
 	
 	<footer th:replace="fragments/footerFragment :: footer">></footer>
 </body>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("#contacts").load("../contacts.html");
+    });
+});
+</script>
 </html>

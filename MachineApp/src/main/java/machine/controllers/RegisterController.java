@@ -9,8 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import machine.data.entities.User;
 import machine.dto.UserDto;
 import machine.services.UserService;
 
@@ -34,13 +32,11 @@ public class RegisterController {
 	@PostMapping("/register")
 	public String registerUser(@Valid @ModelAttribute("user") UserDto userDto, BindingResult bindingResult, Model model) {
 		if(bindingResult.hasErrors()) {
-			//model.addAttribute("user", userDto);
 			if (bindingResult.hasGlobalErrors()) {
 				bindingResult.rejectValue("confirmPassword", "404", bindingResult.getGlobalError().getDefaultMessage());
 			}
 			return "register";
 		}
-
 		try {
 			this.userService.createUserAccount(userDto);
 		} catch (IllegalArgumentException e) {
@@ -48,7 +44,6 @@ public class RegisterController {
 			model.addAttribute("user", userDto);
 			return "register";
 		}
-
 		return "/login";
 	}
 }

@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import machine.data.enums.MachineType;
 import machine.dto.AdDryerDto;
-import machine.dto.Machine1Dto;
-import machine.dto.MachineDto;
 import machine.dto.PistonCompressorDto;
 import machine.dto.RfDryerDto;
 import machine.dto.ScrewCompressorDto;
@@ -40,54 +38,9 @@ public class MachineController {
 		modelAndView.setViewName("addMachine");
 		return modelAndView;
 	}
-	@GetMapping("/add1")
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
-	public ModelAndView getAddMachineForm1(ModelAndView modelAndView) {
-		modelAndView.addObject("machine", new Machine1Dto());
-		modelAndView.setViewName("addMachineAjax");
-		return modelAndView;
-	}
-	@PostMapping("/add1")
-	public ModelAndView addMachine(@Valid @ModelAttribute ("machine") Machine1Dto machine, BindingResult bindingResult, ModelAndView modelAndView) {	
-		if(bindingResult.hasErrors()) {
-			modelAndView.addObject("machine", machine);
-			modelAndView.setViewName("addMachineAjax");
-			return modelAndView;
-		}
-		switch(machine.getMachineType().name()) {
-		case "SCREW_COMPRESSOR" : 
-				if(machine.getVolumeAt10Bars() == 0.0 || machine.getVolumeAt10Bars() == 0.0 ||
-				machine.getVolumeAt13Bars() == 0.0) {
-					modelAndView.addObject("machine", machine);
-					modelAndView.setViewName("addMachineAjax");
-					return modelAndView;
-				}
-				this.machineService.addMachine(machine);
-			break;
-		case "PISTON_COMPRESSOR" : 
-			if(machine.getNumberOfPistons() == 0|| machine.getNumberOfStages() == 0) {
-				modelAndView.addObject("machine", machine);
-				modelAndView.setViewName("addMachineAjax");
-				return modelAndView;
-			}
-			this.machineService.addMachine(machine);
-			break;
-		case "ADSORPTION_DRYER" : 
-			break;
-		case "REFRIGERATION_DRYER" : 
-			break;
-			default:
-				break;
-		}
-		modelAndView.setViewName("/");
-		return modelAndView;
-		
-	}
-
 
 	@GetMapping("/add/SCREW_COMPRESSOR")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
-		//@GetMapping("/edit/{type}") @PathVariable String machineType
 	public ModelAndView getAddScrewCompressorForm(ModelAndView modelAndView) {
 		modelAndView.addObject("machine", new ScrewCompressorDto());
 		modelAndView.setViewName("addScrew");

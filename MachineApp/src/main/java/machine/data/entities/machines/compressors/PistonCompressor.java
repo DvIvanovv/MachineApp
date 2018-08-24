@@ -4,8 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
-
-import machine.data.entities.machines.dryers.AdsorptionDryer;
 import machine.dto.PistonCompressorDto;
 
 @Entity

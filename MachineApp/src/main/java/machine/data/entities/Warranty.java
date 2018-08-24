@@ -5,11 +5,8 @@ import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.UniqueElements;
-
 import machine.data.entities.machines.Machine;
-import machine.dto.MachineDto;
+
 @Entity
 @Table(name = "waranties")
 public class Warranty {

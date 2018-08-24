@@ -10,6 +10,7 @@ import machine.data.entities.ServiceOrder;
 
 @Repository
 public interface ServiceOrderRepository extends JpaRepository<ServiceOrder, Long>{
+	
 	List<ServiceOrder> findAllByUserUsername(String username);
 	
 }

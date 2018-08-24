@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
@@ -13,14 +12,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
 import machine.data.entities.Consumable;
-import machine.data.entities.machines.dryers.AdsorptionDryer;
 import machine.data.enums.MachineType;
 
 @Entity
@@ -66,7 +62,6 @@ public class Machine {
 	public Machine() {
 		super();
 		this.consumables = new ArrayList<>();
-		// TODO Auto-generated constructor stub
 	}
 	/**
 	 * @return the id

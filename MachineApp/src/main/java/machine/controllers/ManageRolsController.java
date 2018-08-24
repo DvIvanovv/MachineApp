@@ -25,7 +25,6 @@ public class ManageRolsController {
 	@GetMapping("/users")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String getAllUsersManageForm(Model model) {
-		
 		model.addAttribute("users", this.userSerrvice.getAllUsers());
 		return "showAllUsers";
 	}
@@ -33,7 +32,6 @@ public class ManageRolsController {
 	 @GetMapping("/edit/{username}")
 	 @PreAuthorize("hasRole('ROLE_ADMIN')")
 	 public String addManagerRole(@PathVariable String username, Model model) {
-		
 		 String message = this.userSerrvice.addRole(username);
 		model.addAttribute("message", message);
 		 return "roleChange";
@@ -41,11 +39,8 @@ public class ManageRolsController {
 	 @GetMapping("/delete/{username}")
 	 @PreAuthorize("hasRole('ROLE_ADMIN')")
 	 public String removeManagerRole(@PathVariable String username, Model model) {
-		
 		 String message= this.userSerrvice.removeRole(username);
 		 model.addAttribute("message", message);
 		 return "roleChange";
 	    }
-	
-
 }

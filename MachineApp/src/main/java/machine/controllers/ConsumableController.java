@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import machine.data.entities.machines.Machine;
 import machine.data.enums.ConsumableType;
 import machine.dto.ConsumableDto;
 import machine.dto.MachineDto;
@@ -56,16 +54,9 @@ public class ConsumableController 	{
 		boolean isAdded = this.consumableService.addConsumable(consumable);
 		model.addAttribute("consumable", consumable);
 		model.addAttribute("isAdded", isAdded);
-		return "successfulyAddConsumable"; //TODO go to consumable list instead of index
+		return "successfulyAddConsumable";
 	}
 	
-	
-//	@ModelAttribute("allMachines")
-//	public List<Machine> machines() {
-//		List<Machine> machines=new ArrayList<>();
-//		machines = machineService.getAllMachines();
-//		return machines;
-//	}
 	@ModelAttribute("allMachines")
 	public List<MachineDto> machines() {
 		List<MachineDto> machines=new ArrayList<>();

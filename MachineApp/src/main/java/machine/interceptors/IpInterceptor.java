@@ -11,8 +11,8 @@ public class IpInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		//String ipAddress = request.getRemoteAddr();
-		String ipAddress = request.getRemoteHost() ;
+		String ipAddress = request.getRemoteAddr();
+		//String ipAddress = request.getRemoteHost() ;
 		request.setAttribute("ipAddress", ipAddress);
 		return true;
 	}
