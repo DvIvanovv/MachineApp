@@ -37,8 +37,8 @@ public class UserServiceImpl implements UserService {
 	 * @see machine.services.UserService#isUserExists(java.lang.String)
 	 */
 
-	@Override
-	public boolean isUsernameExist(String username) {
+	
+	private boolean isUsernameExist(String username) {
 		if(this.userRepository.findByUsername(username) != null) {
 			return true;
 		}
@@ -68,11 +68,11 @@ public class UserServiceImpl implements UserService {
 		authGroup.setUsername(user.getUsername());
 		authGroup.setAuthGroup("USER");
 		this.authGroupRepository.save(authGroup);
-		List<User> users = (List<User>)userRepository.findAll();
-		for(User user1 : users) {
-			System.out.println("username: " + user1.getUsername());
-			System.out.println("password: " + user1.getPassword());
-		}
+//		List<User> users = (List<User>)userRepository.findAll();
+//		for(User user1 : users) {
+//			System.out.println("username: " + user1.getUsername());
+//			System.out.println("password: " + user1.getPassword());
+//		}
 		return user;
 	}
 

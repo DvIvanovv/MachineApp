@@ -25,21 +25,21 @@
 				</div>
 			</div>
 			<div class="form-group row ">
-				<label for="powerInput" class="col-sm-2 col-form-label">Energy consumption:</label>
+				<label for="consumptionInput" class="col-sm-2 col-form-label">Energy consumption:</label>
 				<div class="form-group col-sm-4">
 				 	<input type="text" th:field="*{powerConsumption}" id="consumptionInput" class="form-control" />
 					<p th:each="err : ${#fields.errors('powerConsumption')}" th:text="${err}" /></p>
 				</div>
 			</div>
 			<div class="form-group row ">
-				<label for="powerInput" class="col-sm-2 col-form-label">Dimensions:</label>
+				<label for="dimensionsInput" class="col-sm-2 col-form-label">Dimensions:</label>
 				<div class="form-group col-sm-4">
-					 <input type="text" th:field="*{dimension}" id="consumptionInput" class="form-control" />
+					 <input type="text" th:field="*{dimension}" id="dimensionsInput" class="form-control" />
 					 <p th:each="err : ${#fields.errors('dimension')}" th:text="${err}" /></p>
 				</div>
 			</div>
 			<div class="form-group row ">
-				<label for="powerInput" class="col-sm-2 col-form-label">Weigth:</label>
+				<label for="weigthInput" class="col-sm-2 col-form-label">Weigth:</label>
 				<div class="form-group col-sm-4">
 					 <input type="text"	th:field="*{weigth}" id="weigthInput" class="form-control" />
 					<p th:each="err : ${#fields.errors('weigth')}" th:text="${err}" /></p>
@@ -47,14 +47,14 @@
 			</div>
 
 			<div class="form-group row ">
-				<label for="powerInput" class="col-sm-2 col-form-label">Volumetric flow rate:</label>
+				<label for="volumetricFlowRate" class="col-sm-2 col-form-label">Volumetric flow rate:</label>
 				<div class="form-group col-sm-4">
 				 	<input type="text" th:field="*{volumetricFlowRate}" id="volumetricFlowRate" class="form-control" />
 					<p th:each="err : ${#fields.errors('volumetricFlowRate')}" th:text="${err}" /></p>
 				</div>
 			</div>
 			<div class="form-group row ">
-				<label for="powerInput" class="col-sm-2 col-form-label">Compressed air connection:</label>
+				<label for="compressedAirConnection" class="col-sm-2 col-form-label">Compressed air connection:</label>
 				<div class="form-group col-sm-4">
 					<input type="text" th:field="*{compressedAirConnection}" id="compressedAirConnection" class="form-control" />
 					<p th:each="err : ${#fields.errors('compressedAirConnection')}"	th:text="${err}" /></p>

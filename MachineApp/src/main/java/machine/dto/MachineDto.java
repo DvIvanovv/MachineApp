@@ -22,7 +22,7 @@ public class MachineDto {
 	@Max(1000)
 	@Min(1)
 	protected Double power;
-	@NotNull (message = "Въведете стойност")
+	@NotNull 
 	protected Double powerConsumption;
 	@NotNull
 	@Size(min = 6, max = 15)
@@ -33,7 +33,7 @@ public class MachineDto {
 	protected Double weigth;
 	
 	protected Warranty waranty;
-	@NotNull (message = "Въведете стойност")
+	@NotNull 
 	protected MachineType machineType;
 	
 	

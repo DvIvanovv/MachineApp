@@ -25,21 +25,21 @@
 				</div>
 			</div>
 			<div class="form-group row ">
-				<label for="powerInput" class="col-sm-2 col-form-label">Energy consumption:</label>
+				<label for="consumptionInput" class="col-sm-2 col-form-label">Energy consumption:</label>
 				<div class="form-group col-sm-4">
 				 	<input type="text" th:field="*{powerConsumption}" id="consumptionInput" class="form-control" />
 					<p th:each="err : ${#fields.errors('powerConsumption')}" th:text="${err}" /></p>
 				</div>
 			</div>
 			<div class="form-group row ">
-				<label for="powerInput" class="col-sm-2 col-form-label">Dimensions:</label>
+				<label for="dimensionsInput" class="col-sm-2 col-form-label">Dimensions:</label>
 				<div class="form-group col-sm-4">
-					 <input type="text" th:field="*{dimension}" id="consumptionInput" class="form-control" />
+					 <input type="text" th:field="*{dimension}" id="dimensionsInput" class="form-control" />
 					 <p th:each="err : ${#fields.errors('dimension')}" th:text="${err}" /></p>
 				</div>
 			</div>
 			<div class="form-group row ">
-				<label for="powerInput" class="col-sm-2 col-form-label">Weigth:</label>
+				<label for="weigthInput" class="col-sm-2 col-form-label">Weigth:</label>
 				<div class="form-group col-sm-4">
 					 <input type="text"	th:field="*{weigth}" id="weigthInput" class="form-control" />
 					<p th:each="err : ${#fields.errors('weigth')}" th:text="${err}" /></p>
@@ -47,17 +47,17 @@
 			</div>
 
 			<div class="form-group row ">
-				<label for="powerInput" class="col-sm-2 col-form-label">Number of pistons:</label>
+				<label for="numberOfPistons" class="col-sm-2 col-form-label">Number of pistons:</label>
 				<div class="form-group col-sm-4">
-					<input type="text" th:field="*{numberOfPistons}" id="vnumberOfPistons" class="form-control" />
+					<input type="text" th:field="*{numberOfPistons}" id="numberOfPistons" class="form-control" />
 					<p th:each="err : ${#fields.errors('numberOfPistons')}" th:text="${err}" /></p>
 				</div>
 			</div>
 			<div class="form-group row ">
-				<label for="powerInput" class="col-sm-2 col-form-label">Number of stages:</label>
+				<label for="numberOfStages" class="col-sm-2 col-form-label">Number of stages:</label>
 				<div class="form-group col-sm-4">
-					<input type="text" th:field="*{numberOfstage}" id="numberOfstage" class="form-control" />
-					<p th:each="err : ${#fields.errors('numberOfstage')}" th:text="${err}" /></p>
+					<input type="text" th:field="*{numberOfStages}" id="numberOfStages" class="form-control" />
+					<p th:each="err : ${#fields.errors('numberOfStages')}" th:text="${err}" /></p>
 				</div>
 			</div>
 			<p>

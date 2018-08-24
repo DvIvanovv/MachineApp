@@ -41,7 +41,7 @@ public class Machine1Dto {
 
 	protected short numberOfPistons;
 
-	protected short numberOfstage;
+	protected short numberOfStages;
 	
 	private Double volumetricFlowRate;
 
@@ -113,11 +113,11 @@ public class Machine1Dto {
 	public void setNumberOfPistons(short numberOfPistons) {
 		this.numberOfPistons = numberOfPistons;
 	}
-	public short getNumberOfstage() {
-		return numberOfstage;
+	public short getNumberOfStages() {
+		return numberOfStages;
 	}
-	public void setNumberOfstage(short numberOfstage) {
-		this.numberOfstage = numberOfstage;
+	public void setNumberOfStages(short numberOfstage) {
+		this.numberOfStages = numberOfstage;
 	}
 	public Double getVolumetricFlowRate() {
 		return volumetricFlowRate;

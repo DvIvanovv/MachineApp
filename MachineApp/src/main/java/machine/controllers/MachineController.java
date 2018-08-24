@@ -65,6 +65,12 @@ public class MachineController {
 				this.machineService.addMachine(machine);
 			break;
 		case "PISTON_COMPRESSOR" : 
+			if(machine.getNumberOfPistons() == 0|| machine.getNumberOfStages() == 0) {
+				modelAndView.addObject("machine", machine);
+				modelAndView.setViewName("addMachineAjax");
+				return modelAndView;
+			}
+			this.machineService.addMachine(machine);
 			break;
 		case "ADSORPTION_DRYER" : 
 			break;
@@ -73,7 +79,8 @@ public class MachineController {
 			default:
 				break;
 		}
-		return null;
+		modelAndView.setViewName("/");
+		return modelAndView;
 		
 	}
 
@@ -95,9 +102,15 @@ public class MachineController {
 			modelAndView.setViewName("addScrew");
 			return modelAndView;
 		}
-		this.machineService.addMachine(machine);
-		return new ModelAndView("redirect:/");
-
+		try {
+			this.machineService.addMachine(machine);
+			return new ModelAndView("redirect:/machines/showAll/SCREW_COMPRESSOR");
+		} catch (IllegalArgumentException e) {
+			bindingResult.rejectValue("model","404", e.getMessage());
+			modelAndView.addObject("machine", machine);
+			modelAndView.setViewName("addScrew");
+			return modelAndView;
+		}
 	}
 
 	@GetMapping("/add/PISTON_COMPRESSOR")
@@ -116,10 +129,15 @@ public class MachineController {
 			modelAndView.setViewName("addPiston");
 			return modelAndView;
 		}
-		this.machineService.addMachine(machine);
-		//			modelAndView.setViewName("index");
-		return new ModelAndView("redirect:/");
-
+		try {
+			this.machineService.addMachine(machine);
+			return new ModelAndView("redirect:/machines/showAll/PISTON_COMPRESSOR");
+		} catch (IllegalArgumentException e) {
+			bindingResult.rejectValue("model","404", e.getMessage());
+			modelAndView.addObject("machine", machine);
+			modelAndView.setViewName("addPiston");
+			return modelAndView;
+		}
 	}
 
 	@GetMapping("/add/ADSORPTION_DRYER")
@@ -138,10 +156,15 @@ public class MachineController {
 			modelAndView.setViewName("addAdsorption");
 			return modelAndView;
 		}
-		this.machineService.addMachine(machine);
-		//			modelAndView.setViewName("index");
-		return new ModelAndView("redirect:/");
-
+		try {
+			this.machineService.addMachine(machine);
+			return new ModelAndView("redirect:/machines/showAll/ADSORPTION_DRYER");
+		} catch (IllegalArgumentException e) {
+			bindingResult.rejectValue("model","404", e.getMessage());
+			modelAndView.addObject("machine", machine);
+			modelAndView.setViewName("addAdsorption");
+			return modelAndView;
+		}
 	}
 	
 	@GetMapping("/add/REFRIGERATION_DRYER")
@@ -160,22 +183,27 @@ public class MachineController {
 			modelAndView.setViewName("addRefrigeneration");
 			return modelAndView;
 		}
-		this.machineService.addMachine(machine);
-		//			modelAndView.setViewName("index");
-		return new ModelAndView("redirect:/");
-
+		try {
+			this.machineService.addMachine(machine);
+			return new ModelAndView("redirect:/machines/showAll/REFRIGERATION_DRYER");
+		} catch (IllegalArgumentException e) {
+			bindingResult.rejectValue("model","404", e.getMessage());
+			modelAndView.addObject("machine", machine);
+			modelAndView.setViewName("addRefrigeneration");
+			return modelAndView;
+		}
 	}
 	@GetMapping("/showAll/REFRIGERATION_DRYER")
 	public ModelAndView getShowAllRfDryerForm(ModelAndView modelAndView) {
 		modelAndView.addObject("machines", this.machineService.getAllMachinesByType(MachineType.REFRIGERATION_DRYER));
-		modelAndView.addObject("machineType", "Show all Ad Dryers");
+		modelAndView.addObject("machineType", "Show all Refrigeration Dryers");
 		modelAndView.setViewName("showAllFromType");
 		return modelAndView;
 	}
 	@GetMapping("/showAll/ADSORPTION_DRYER")
 	public ModelAndView getShowAllAdDryerForm(ModelAndView modelAndView) {
 		modelAndView.addObject("machines", this.machineService.getAllMachinesByType(MachineType.ADSORPTION_DRYER));
-		modelAndView.addObject("machineType", "Show all RF Dryers");
+		modelAndView.addObject("machineType", "Show all Adsorption Dryers");
 		modelAndView.setViewName("showAllFromType");
 		return modelAndView;
 	}

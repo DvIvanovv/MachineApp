@@ -1,5 +1,6 @@
 package machine.dto;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import machine.data.entities.machines.dryers.RefrigerationDryer;
@@ -7,9 +8,9 @@ import machine.data.enums.MachineType;
 
 public class RfDryerDto extends MachineDto {
 
-	@NotNull (message = "Въведете стойност")
+	@NotNull 
 	private Double volumetricFlowRate;
-	@NotNull (message = "Въведете стойност")
+	@NotBlank 
 	private String compressedAirConnection;
 
 	public RfDryerDto() {

@@ -9,7 +9,7 @@ import machine.dto.UserDto;
 @Service
 public interface UserService {
 	
-	public boolean isUsernameExist(String username);
+	//public boolean isUsernameExist(String username);
 	public User createUserAccount(UserDto userDto);
 	public User findByUsername(String username);
 	public List<UserDto> getAllUsers();

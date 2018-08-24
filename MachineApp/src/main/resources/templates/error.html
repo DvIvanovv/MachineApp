@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/headFragment :: head">
+</head>
+<body>
+	<header th:replace="fragments/navBarFragment :: header"></header>
+	<div class="container main-content">
+        
+        <ul class="list-group" style="margin-top: 100px; margin-bottom:50px;">
+            <li class="list-group-item list-group-item-danger"><h3 th:text="${error}">Status</h3></li>
+            <li class="list-group-item" th:text="'Status code: '+ ${status}"></li>
+        </ul>
+        <p><a href="/" th:href="@{/}">Back to home page</a></p>
+    </div>
+	
+	<footer th:replace="fragments/footerFragment :: footer">></footer>
+</body>
+</html>

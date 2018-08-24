@@ -3,6 +3,7 @@ package machine.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -16,6 +17,8 @@ public class ConsumableDto {
 
 	@NotNull
 	private AccessoryType accessoryType;
+	@NotBlank
+	private String name;
 	@NotEmpty
 	private List<Machine> machines;
 
@@ -59,4 +62,11 @@ public class ConsumableDto {
 	public void setMachines(List<Machine> machines) {
 		this.machines = machines;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 }

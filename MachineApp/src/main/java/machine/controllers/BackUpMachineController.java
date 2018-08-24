@@ -10,11 +10,11 @@ import machine.data.entities.machines.Machine;
 import machine.services.MachineService;
 
 @RestController("/api")
-public class backUpMachineController {
+public class BackUpMachineController {
 	private MachineService machineService;
 	
 	@Autowired
-	public backUpMachineController(MachineService machineService) {
+	public BackUpMachineController(MachineService machineService) {
 		super();
 		this.machineService =  machineService;
 	}

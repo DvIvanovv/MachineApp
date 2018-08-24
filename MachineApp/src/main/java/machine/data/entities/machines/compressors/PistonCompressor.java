@@ -16,7 +16,8 @@ public class PistonCompressor extends Compressor {
 	protected short numberOfPistons;
 	@Column(name = "number_of_stages")
 	@NotNull
-	protected short numberOfstage;
+	protected short numberOfStags;
+	
 	
 	public short getNumberOfPistons() {
 		return numberOfPistons;
@@ -24,11 +25,11 @@ public class PistonCompressor extends Compressor {
 	public void setNumberOfPistons(short numberOfPistons) {
 		this.numberOfPistons = numberOfPistons;
 	}
-	public short getNumberOfstage() {
-		return numberOfstage;
+	public short getnumberOfStags() {
+		return numberOfStags;
 	}
-	public void setNumberOfstage(short numberOfstage) {
-		this.numberOfstage = numberOfstage;
+	public void setnumberOfStags(short numberOfStags) {
+		this.numberOfStags = numberOfStags;
 	}
 	public Class getMappedClass() {
 		return PistonCompressorDto.class;

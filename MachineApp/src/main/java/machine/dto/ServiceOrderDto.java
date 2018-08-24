@@ -25,7 +25,7 @@ public class ServiceOrderDto {
 	private Date serviceDate;
 	private User user;
 	private Warranty warranty;
-	private List<String> consumables;
+	private List<Consumable> consumables;
 							
 	public ServiceOrderDto() {
 		super();
@@ -53,12 +53,12 @@ public class ServiceOrderDto {
 	}
 
 
-	public List<String> getConsumables() {
+	public List<Consumable> getConsumables() {
 		return consumables;
 	}
 
 
-	public void setConsumables(List<String> consumables) {
+	public void setConsumables(List<Consumable> consumables) {
 		this.consumables = consumables;
 	}
 

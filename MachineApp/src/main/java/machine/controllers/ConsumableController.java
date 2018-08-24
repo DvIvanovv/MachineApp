@@ -53,8 +53,10 @@ public class ConsumableController 	{
 			model.addAttribute("accessory", accessory);
 			return "addAccessory";
 		}
-		this.accessoryService.addAccessory(accessory);
-		return "index"; //TODO go to accessory list instead of index
+		boolean isAdded = this.accessoryService.addAccessory(accessory);
+		model.addAttribute("consumable", accessory);
+		model.addAttribute("isAdded", isAdded);
+		return "successfulyAddConsumable"; //TODO go to accessory list instead of index
 	}
 	
 	

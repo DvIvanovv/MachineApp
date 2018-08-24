@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "users")
@@ -12,8 +13,10 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Basic
+	@NotBlank
 	private String username;
 	@Basic
+	@NotBlank
 	private String password;
 
 	@OneToMany(mappedBy= "user",cascade = CascadeType.PERSIST)

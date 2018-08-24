@@ -13,8 +13,9 @@ import machine.dto.ConsumableDto;
 @Service
 public interface ConsumableService {
 
-	public void addAccessory(ConsumableDto accessoryDto);
+	public boolean addAccessory(ConsumableDto accessoryDto);
 	//List<Accessory> findAllByModel(Machine machine);
 	
 	public Consumable findByType(AccessoryType type);
+	public Consumable findByMachineAndType(Long machineId, AccessoryType type);
 }

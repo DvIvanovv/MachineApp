@@ -42,9 +42,9 @@ public class RegisterWarrantyServiceImpl implements RgisterWarrantyService {
 					"There is a warranty with serial number: "
 							+ registerMachine.getSerialNumber());
 		}
-		if(registerMachine.getOrderDate().before(checkDate())) {
+		if(!checkDate(registerMachine.getOrderDate())) {
 			throw new  IllegalArgumentException (
-					"Register date must be within 30 days after order date!");
+					"Register date must be within 30 days after order date and can not be in the future");
 		}
 		Warranty warranty = modelMapper.map(registerMachine, Warranty.class);
 		warranty.setMachine(this.machineService.findByModel(registerMachine.getMachine()));
@@ -79,14 +79,17 @@ public class RegisterWarrantyServiceImpl implements RgisterWarrantyService {
 		return false;
 	}
 	
-	private Date checkDate() {
-	
+	private boolean checkDate(Date date) {
 		Date currentDate = new Date();
 		Calendar c = Calendar.getInstance();
 		c.setTime(currentDate);
 		c.add(Calendar.DATE , -30);
-		Date currentDatePlusOneMonth = c.getTime();
-		return currentDatePlusOneMonth;
+		Date currentDateMinusOneMonth = c.getTime();
+		if(date.before(currentDateMinusOneMonth) || date.after(currentDate)) {
+			return false;
+		}
+		
+		return true;
 		
 	}
 	@Override
@@ -102,7 +105,7 @@ public class RegisterWarrantyServiceImpl implements RgisterWarrantyService {
 	@Async
 	public CompletableFuture<String> countMachineSales(String machineModel) {
 		List<Warranty> result = this.registerWarrantyRepository.findAllByMachineModel(machineModel);
-		return CompletableFuture.completedFuture("MAchine model: " + machineModel + "is sold " + result.size() + "times");
+		return CompletableFuture.completedFuture("Machine model: " + machineModel + " is sold " + result.size() + " times.");
 	}
 		
 }

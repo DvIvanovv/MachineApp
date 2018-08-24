@@ -24,8 +24,8 @@ public class ServiceOrder {
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
 	@ManyToMany(cascade = CascadeType.PERSIST)
-	@JoinTable(name = "service_order_accessories")
-	List<Consumable> accessories ;
+	@JoinTable(name = "service_order_consumables")
+	List<Consumable> consumables ;
 	@Column(name = "service_date")
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
@@ -35,7 +35,7 @@ public class ServiceOrder {
 
 	public ServiceOrder() {
 		super();
-		this.accessories = new ArrayList<>();
+		this.consumables = new ArrayList<>();
 	}
 
 	/**
@@ -54,16 +54,16 @@ public class ServiceOrder {
 	}
 
 	/**
-	 * @return the accsesories
+	 * @return the consumables
 	 */
-	public List<Consumable> getAccsesories() {
-		return accessories;
+	public List<Consumable> getConsumables() {
+		return consumables;
 	}
 	/**
-	 * @param accsesories the accsesories to set
+	 * @param accsesories the consumables to set
 	 */
-	public void setAccsesories(List<Consumable> accsesories) {
-		this.accessories = accsesories;
+	public void setConsumables(List<Consumable> consumables) {
+		this.consumables = consumables;
 	}
 
 

@@ -24,8 +24,7 @@ public class ApproveWarranty {
 		this.warrantyService = warrantyService;
 	}
 
-	@Scheduled( cron = "0 0 6 * * *")//fixedRate = 5000 fixedRate = 5000// every day 06:00
-	@Async
+	@Scheduled( cron = "0 0 6 * * *")//fixedRate = 5000// every day 06:00
 	public void approveWarranties() {
 		int counter = 0;
 		List<Warranty> warranties = this.warrantyService.getAllWarranties();

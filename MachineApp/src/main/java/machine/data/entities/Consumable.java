@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import machine.data.entities.machines.Machine;
 import machine.data.enums.AccessoryType;
@@ -18,6 +19,8 @@ public class Consumable {
 
 	@Column(name = "accessory_type")
 	private AccessoryType accessoryType;
+	@NotBlank
+	private String name;
 	@ManyToMany(cascade = CascadeType.PERSIST,fetch=FetchType.EAGER)
 	@JoinTable(name = "accessory_machine")
 	private List<Machine> machines;
@@ -64,6 +67,13 @@ public class Consumable {
 	public void setMachines(List<Machine> machines) {
 		this.machines = machines;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 
 
 

@@ -22,7 +22,7 @@
 			<div class="form-group row ">
 			<label for="serviceDate" class="col-sm-2 col-form-label" th:field="*{serviceDate}">Service date</label>
 				<div class="form-group col-sm-4">
-					<input type="date" id="serviceDate" name="serviceDate" class="form-control" ><br><br>
+					<input type="date" id="serviceDate" name="serviceDate" class="form-control" />
 						<small id="capHelp" class="form-control-feedback" th:each="error : ${#fields.errors('serviceDate')}" th:text="${error}">Error Message</small>
 				</div>
 			</div>

@@ -1,35 +1,47 @@
 package machine.dto;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import machine.data.entities.machines.compressors.PistonCompressor;
-import machine.data.entities.machines.compressors.ScrewCompressor;
 import machine.data.enums.MachineType;
 
 public class PistonCompressorDto extends MachineDto {
 
 	@NotNull
-	protected short numberOfPistons;
+	@Min(value =1)
+	protected Short numberOfPistons;
 	@NotNull
-	protected short numberOfstage;
-
+	@Min(value =1)
+	protected Short numberOfStages;
 
 	public PistonCompressorDto() {
 		super();
 		setMachineType(MachineType.PISTON_COMPRESSOR);
 	}
 
-	public short getNumberOfPistons() {
+
+
+	public Short getNumberOfPistons() {
 		return numberOfPistons;
 	}
-	public void setNumberOfPistons(short numberOfPistons) {
+
+
+
+	public void setNumberOfPistons(Short numberOfPistons) {
 		this.numberOfPistons = numberOfPistons;
 	}
-	public short getNumberOfstage() {
-		return numberOfstage;
+
+
+
+	public Short getNumberOfStages() {
+		return numberOfStages;
 	}
-	public void setNumberOfstage(short numberOfstage) {
-		this.numberOfstage = numberOfstage;
+
+
+
+	public void setNumberOfStages(Short numberOfStages) {
+		this.numberOfStages = numberOfStages;
 	}
 	@Override
 	public Class getMappedClass() {

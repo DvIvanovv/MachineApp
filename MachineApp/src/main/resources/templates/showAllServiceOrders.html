@@ -18,7 +18,7 @@
 					<li class="list-group-item" th:text="'Service date ' + ${#dates.format(serviceOrder.serviceDate, 'dd-MM-yyyy')}"></li> 
 				</ul>
 				<th:block th:each="consumable : ${serviceOrder.getConsumables()}">
-				<p class="list-group-item" th:text="${consumable}"></p>
+				<p class="list-group-item" th:text="${consumable.getAccessoryType().name()} + ' - ' + ${consumable.name}"></p>
 			</div>
 		</th:block>	
 	   </div>

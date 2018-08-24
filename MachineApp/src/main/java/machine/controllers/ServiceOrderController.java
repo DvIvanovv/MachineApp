@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import machine.dto.WarrantyDto;
-import machine.ServiceOrderServiceImpl;
 import machine.data.entities.Consumable;
 import machine.data.enums.AccessoryType;
 import machine.dto.ServiceOrderDto;
@@ -27,6 +26,7 @@ import machine.services.ConsumableService;
 import machine.services.MachineService;
 import machine.services.RgisterWarrantyService;
 import machine.services.UserService;
+import machine.services.impl.ServiceOrderServiceImpl;
 	
 	
 @Controller
@@ -82,15 +82,15 @@ public class ServiceOrderController {
 			model.addAttribute("serviceOrder", serviceOrder);
 			return "addServiceOrder";
 		}
-		List<Consumable> consumables = new ArrayList<>();
-		for(String s : serviceOrder.getConsumables()) {
-			AccessoryType val =AccessoryType.valueOf(s);
-			Consumable con = this.accessoryService.findByType(val);
-			consumables.add(con);
-		}
+//		List<Consumable> consumables = new ArrayList<>();
+//		for(String s : serviceOrder.getConsumables()) {
+//			AccessoryType val =AccessoryType.valueOf(s);
+//			Consumable con = this.accessoryService.findByMachineAndType(serviceOrder.getForMachine(), val);//findByType(val);
+//			consumables.add(con);
+//		}
 		//serviceOrder.getConsumables().stream().forEach(c-> consumables.add(this.accessoryService.findByType(AccessoryType.valueOf(c))));
 		try {
-			serviceOrderService.addServiceOrder(serviceOrder, consumables);	
+			serviceOrderService.addServiceOrder(serviceOrder);	
 		} catch( IllegalArgumentException e) {
 			bindingResult.rejectValue("serviceDate","404", e.getMessage());
 			model.addAttribute("serviceDate", serviceOrder);

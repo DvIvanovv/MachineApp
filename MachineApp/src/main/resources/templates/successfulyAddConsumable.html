@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/headFragment :: head">
+</head>
+<body>
+	<header th:replace="fragments/navBarFragment :: header"></header>
+	<div class="container main-content">
+       	<div style="margin-top:50px;">	
+       	<div th:if="${isAdded}">
+       		<p  th:each="machine: ${consumable.machines}" th:text="'Succsessfuly added consumable ' +  ${consumable.accessoryType} + ' for machine ' + ${machine.model}"></p>
+       	</div>													
+        <div th:unless="${isAdded}">
+        	<p>"There is such consumable for this machine."</p>
+        </div>
+
+        <p><a href="/" th:href="@{/}">Back to home page</a></p>
+    </div>
+	</div>
+	<footer th:replace="fragments/footerFragment :: footer">></footer>
+</body>
+</html>

@@ -1,4 +1,4 @@
-package machine;
+package machine.services.impl;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,7 +30,14 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
 
 
 	@Override
-	public void addServiceOrder(ServiceOrderDto serviceOrderDto, List<Consumable> consumables) {
+	public void addServiceOrder(ServiceOrderDto serviceOrderDto) {
+		if(!checkDate(serviceOrderDto.getServiceDate())) {
+			throw new  IllegalArgumentException (
+					"Service date must be within 30 days after today!");
+		}
+		
+		ServiceOrder serviceOrder = modelMapper.map(serviceOrderDto, ServiceOrder.class);
+		this.serviceOrderRepository.save(serviceOrder);
 	}
 	
 	@Override
@@ -41,10 +48,10 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
 			ServiceOrderDto so = new ServiceOrderDto();
 			so = modelMapper.map(s, ServiceOrderDto.class);
 			so.setForMachine(s.getWarranty().getMachine().getModel());
-			for(Consumable c : s.getAccsesories()) {
-				String consumable = c.getAccessoryType().toString();
-				so.getConsumables().add(consumable);
-			}
+//			for(Consumable c : s.getAccsesories()) {
+//				String consumable = c.getAccessoryType().toString();
+//				so.getConsumables().add(consumable);
+//			}
 			result.add(so);
 		}
 		return result;
@@ -56,11 +63,13 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
 		Date currentDate = new Date();
 		Calendar c = Calendar.getInstance();
 		c.setTime(currentDate);
+		c.add(Calendar.DATE ,1);
+		Date currentDateTomorrow =c.getTime();
 		c.add(Calendar.DATE ,30);
 		Date currentDatePlusOneMonth = c.getTime();
-		c.add(Calendar.DATE ,-60);
-		Date currentDateMinusOneMonth = c.getTime();
-		if(date.after(currentDatePlusOneMonth) || date.before(currentDateMinusOneMonth)) {
+//		c.add(Calendar.DATE ,-60);
+//		Date currentDateMinusOneMonth = c.getTime();
+		if(date.after(currentDatePlusOneMonth) || date.before(currentDateTomorrow)) {
 			return false;
 		}
 		c.setTime(date);

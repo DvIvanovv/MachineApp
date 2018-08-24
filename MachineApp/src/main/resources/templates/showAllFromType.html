@@ -18,9 +18,9 @@
 			<li class="list-group-item" th:text="'Power: ' + ${machine.power}"></li>
 			<li class="list-group-item" th:text="'Consumption: ' + ${machine.powerConsumption}"></li>
 			<li class="list-group-item"  th:text="'Dimensions: ' + ${machine.dimension}"></li>
-			<li class="list-group-item"><a href="#" >Details</a></li>
+			<li id="details" class="list-group-item"><a href="" >Details</a></li>
 		</ul>
-
+			<div id="load"></div>
 			</div>
 			</th:block>	
 			</div>
@@ -28,4 +28,5 @@
 	</div>
 	<footer th:replace="fragments/footerFragment :: footer">></footer>
 </body>
+
 </html>

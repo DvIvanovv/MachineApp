@@ -30,6 +30,11 @@ public class MachineServiceImpl implements MachineService {
 
 	@Override
 	public void addMachine(MachineDto machineDto) {
+		if(isMachineExist(machineDto.getModel())) {
+			throw new  IllegalArgumentException (
+					"Machine with  model "
+							+  machineDto.getModel() + " allready exists.");
+		}
 		Machine machine =(Machine) mapper.map(machineDto, machineDto.getMappedClass());
 		this.machineRepository.save(machine);
 	}
@@ -72,6 +77,13 @@ public class MachineServiceImpl implements MachineService {
 		Machine machine =(Machine) mapper.map(machineDto, machineDto.getMappedClass());
 		this.machineRepository.save(machine);
 		
+	}
+	
+	private boolean isMachineExist(String model) {
+		if(this.machineRepository.findByModel(model) != null) {
+			return true;
+		}
+		return false;
 	}
 		
 }

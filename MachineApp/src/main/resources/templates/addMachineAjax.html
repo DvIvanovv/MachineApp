@@ -7,15 +7,15 @@
 	<header th:replace="fragments/navBarFragment :: header"></header>
 	<div class="container">
 		<h1>Add new machine:</h1>
-		<form action="#" htmlEscape="true" th:action="@{/machines/add1}" th:object="${machine}" method="post">
+		<form action="#"  th:action="@{/machines/add1}" th:object="${machine}" method="post">
 			<input type="text" th:field="*{id}" th:readonly="true" hidden="true" />
 		
 		<div class="form-group row ">
 		<label for="machineType" class="col-sm-2 col-form-label">Machine type:</label>
 			<div class="form-group  col-sm-4">
 			
-    			<select class="form-control" id="machineType" name="machineType" th:field="*{machineType}">
-        			  <option value="#">Choose Machine</option>
+    			<select class="form-control" id="machineType" name="machineType" th:field="*{machineType}" >
+        			  <option value="">Choose Machine</option>
         			<option th:each="type : ${machineTypes}"
                 		th:value="${type}"
                 		th:text="${type}"></option>
@@ -27,42 +27,39 @@
 				<label for="modelInput" class="col-sm-2 col-form-label">Model:</label>
 				<div class="form-group  col-sm-4">
 			 		<input type="text" th:field="*{model}" id="modelInput" class="form-control" />
-					<p th:each="err : ${#fields.errors('model')}" th:text="${err}" /></p>
+					<p th:each="err : ${#fields.errors('model')}" th:text="${err}" />
 				</div>
 			</div>
 			<div class="form-group row ">
 				<label for="powerInput" class="col-sm-2 col-form-label">Power:</label> 
 				<div class="form-group col-sm-4">
 					<input type="text" th:field="*{power}" id="powerInput" class="form-control" />
-					<p th:each="err : ${#fields.errors('power')}" th:text="${err}" /></p>
+					<p th:each="err : ${#fields.errors('power')}" th:text="${err}" />
 				</div>
 			</div>
 			<div class="form-group row ">
 				<label for="powerInput" class="col-sm-2 col-form-label">Energy consumption:</label>
 				<div class="form-group col-sm-4">
 				 	<input type="text" th:field="*{powerConsumption}" id="consumptionInput" class="form-control" />
-					<p th:each="err : ${#fields.errors('powerConsumption')}" th:text="${err}" /></p>
+					<p th:each="err : ${#fields.errors('powerConsumption')}" th:text="${err}" />
 				</div>
 			</div>
 			<div class="form-group row ">
 				<label for="powerInput" class="col-sm-2 col-form-label">Dimensions:</label>
 				<div class="form-group col-sm-4">
 					 <input type="text" th:field="*{dimension}" id="consumptionInput" class="form-control" />
-					 <p th:each="err : ${#fields.errors('dimension')}" th:text="${err}" /></p>
+					 <p th:each="err : ${#fields.errors('dimension')}" th:text="${err}" />
 				</div>
 			</div>
 			<div class="form-group row ">
 				<label for="powerInput" class="col-sm-2 col-form-label">Weigth:</label>
 				<div class="form-group col-sm-4">
 					 <input type="text"	th:field="*{weigth}" id="weigthInput" class="form-control" />
-					<p th:each="err : ${#fields.errors('weigth')}" th:text="${err}" /></p>
+					<p th:each="err : ${#fields.errors('weigth')}" th:text="${err}" />
 				</div>
-			</div>
-			
-			<div id="machine-specific-parametars" >
-			
-			
-			</div>
+			</div>			
+			<span id="machine-specific-parametars" >	
+			</span>
 			
 			<p>
 				<input type="submit" value="Submit" class="btn btn-primary mb-2" />
@@ -78,8 +75,8 @@ $(document).ready(function(){
  
 $("#machineType").change('click',function(e){
  var selectedMachine = $('#machineType').val(); 
-    alert (selectedMachine); 
-    $("#machine-specific-parametars").load(selectedMachine);
+  //  alert (selectedMachine); 
+   // $("#machine-specific-parametars").load(selectedMachine);
     e.preventDefault()
     switch(selectedMachine){
     	case 'SCREW_COMPRESSOR' :
@@ -101,4 +98,5 @@ $("#machineType").change('click',function(e){
  
 });
 </script>
+
 </html>
