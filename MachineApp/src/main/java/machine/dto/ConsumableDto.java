@@ -8,7 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import machine.data.entities.machines.Machine;
-import machine.data.enums.AccessoryType;
+import machine.data.enums.ConsumableType;
 
 
 public class ConsumableDto {
@@ -16,7 +16,7 @@ public class ConsumableDto {
 	private Long id;
 
 	@NotNull
-	private AccessoryType accessoryType;
+	private ConsumableType consumableType;
 	@NotBlank
 	private String name;
 	@NotEmpty
@@ -39,16 +39,16 @@ public class ConsumableDto {
 		this.id = id;
 	}
 	/**
-	 * @return the accessoryType
+	 * @return the consumableType
 	 */
-	public AccessoryType getAccessoryType() {
-		return accessoryType;
+	public ConsumableType getConsumableType() {
+		return consumableType;
 	}
 	/**
-	 * @param accessoryType the accessoryType to set
+	 * @param consumableType the consumableType to set
 	 */
-	public void setAccessoryType(AccessoryType accessoryType) {
-		this.accessoryType = accessoryType;
+	public void setConsumableType(ConsumableType consumableType) {
+		this.consumableType = consumableType;
 	}
 	/**
 	 * @return the machines

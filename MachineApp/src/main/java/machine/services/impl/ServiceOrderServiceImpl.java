@@ -49,7 +49,23 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
 			so = modelMapper.map(s, ServiceOrderDto.class);
 			so.setForMachine(s.getWarranty().getMachine().getModel());
 //			for(Consumable c : s.getAccsesories()) {
-//				String consumable = c.getAccessoryType().toString();
+//				String consumable = c.getConsumableType().toString();
+//				so.getConsumables().add(consumable);
+//			}
+			result.add(so);
+		}
+		return result;
+	}
+	@Override
+	public List<ServiceOrderDto> getAllServiceOrders() {
+		List<ServiceOrder> serviceOrders = this.serviceOrderRepository.findAll();
+		List<ServiceOrderDto> result = new ArrayList<>();
+		for(ServiceOrder s : serviceOrders) {
+			ServiceOrderDto so = new ServiceOrderDto();
+			so = modelMapper.map(s, ServiceOrderDto.class);
+			so.setForMachine(s.getWarranty().getMachine().getModel());
+//			for(Consumable c : s.getAccsesories()) {
+//				String consumable = c.getConsumableType().toString();
 //				so.getConsumables().add(consumable);
 //			}
 			result.add(so);

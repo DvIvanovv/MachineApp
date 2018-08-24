@@ -40,7 +40,7 @@
 							aria-haspopup="true" aria-expanded="false"> Add </a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 							<a class="dropdown-item" th:href="@{/machines/add}">Machine</a> 
-							<a class="dropdown-item" th:href="@{/accessories/add}">Accessory</a>
+							<a class="dropdown-item" th:href="@{/consumables/add}">Consumable</a>
 						</div>
 					</div>
       			</li> 
@@ -52,6 +52,16 @@
       			<li class="nav-item">
       				<div class="nav-item dropdown" sec:authorize="hasRole('ROLE_USER')">
        					<a class="nav-item nav-link" th:href="@{/serviceOrder/add}">Book service<span class="sr-only">(current)</span></a>
+       				</div>
+      			</li>
+      			<li class="nav-item">
+      				<div class="nav-item dropdown" sec:authorize="hasRole('ROLE_USER')">
+       					<a class="nav-item nav-link" th:href="@{/serviceOrder/my}">My service orders<span class="sr-only">(current)</span></a>
+       				</div>
+      			</li>
+      			<li class="nav-item">
+      				<div class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
+       					<a class="nav-item nav-link" th:href="@{/serviceOrder/all}">All service orders<span class="sr-only">(current)</span></a>
        				</div>
       			</li>
       			<li class="nav-item">

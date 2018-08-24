@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import machine.dto.WarrantyDto;
 import machine.data.entities.Consumable;
-import machine.data.enums.AccessoryType;
+import machine.data.enums.ConsumableType;
 import machine.dto.ServiceOrderDto;
 import machine.services.ConsumableService;
 import machine.services.MachineService;
@@ -37,18 +37,18 @@ public class ServiceOrderController {
 	private MachineService machineService;
 	private RgisterWarrantyService warrantyService;
 	private UserService  userService;
-	private ConsumableService accessoryService;
+	private ConsumableService consumableService;
 	
 	@Autowired
 	public ServiceOrderController(MachineService machineService,
 			ServiceOrderServiceImpl serviceOrderService, RgisterWarrantyService warrantyService,
-			UserService  userService,ConsumableService accessoryService) {
+			UserService  userService,ConsumableService consumableService) {
 		super();
 		this.serviceOrderService = serviceOrderService;
 		this.warrantyService = warrantyService;
 		this.machineService = machineService;
 		this.userService = userService;
-		this.accessoryService = accessoryService;
+		this.consumableService = consumableService;
 	}
 
 
@@ -84,11 +84,11 @@ public class ServiceOrderController {
 		}
 //		List<Consumable> consumables = new ArrayList<>();
 //		for(String s : serviceOrder.getConsumables()) {
-//			AccessoryType val =AccessoryType.valueOf(s);
-//			Consumable con = this.accessoryService.findByMachineAndType(serviceOrder.getForMachine(), val);//findByType(val);
+//			ConsumableType val =ConsumableType.valueOf(s);
+//			Consumable con = this.consumableService.findByMachineAndType(serviceOrder.getForMachine(), val);//findByType(val);
 //			consumables.add(con);
 //		}
-		//serviceOrder.getConsumables().stream().forEach(c-> consumables.add(this.accessoryService.findByType(AccessoryType.valueOf(c))));
+		//serviceOrder.getConsumables().stream().forEach(c-> consumables.add(this.consumableService.findByType(ConsumableType.valueOf(c))));
 		try {
 			serviceOrderService.addServiceOrder(serviceOrder);	
 		} catch( IllegalArgumentException e) {
@@ -96,12 +96,18 @@ public class ServiceOrderController {
 			model.addAttribute("serviceDate", serviceOrder);
 			return "addServiceOrder";
 		}
-		return "redirect:/serviceOrder/all";
+		return "redirect:/serviceOrder/my";
 	}
-	@GetMapping("/all")
-	public String showAllServiceOrders(Model model,HttpServletRequest request) {
+	@GetMapping("/my")
+	public String showAllMyServiceOrders(Model model,HttpServletRequest request) {
 		Principal principal = request.getUserPrincipal();
 		model.addAttribute("allServiceOrders",this.serviceOrderService.getAllServiceOrdersByUser(principal.getName()));
+		return "showAllServiceOrders";
+	}
+	@GetMapping("/all")
+	public String showAllServiceOrders(Model model) {
+		
+		model.addAttribute("allServiceOrders",this.serviceOrderService.getAllServiceOrders());
 		return "showAllServiceOrders";
 	}
 

@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 
 import machine.data.entities.Consumable;
 import machine.data.entities.machines.Machine;
-import machine.data.enums.AccessoryType;
-import machine.data.repository.AccessoryRepository;
+import machine.data.enums.ConsumableType;
+import machine.data.repository.ConsumableRepository;
 import machine.dto.ConsumableDto;
 import machine.services.ConsumableService;
 import machine.services.MachineService;
@@ -21,53 +21,53 @@ import machine.services.MachineService;
 @Service
 public class ConsumableServiceImpl implements ConsumableService{
 
-	private AccessoryRepository accessoryRepository;
+	private ConsumableRepository consumableRepository;
 	private ModelMapper modelMapper;
 	private MachineService machineService;
 	@Autowired
-	public ConsumableServiceImpl(AccessoryRepository accessoryRepository,  ModelMapper modelMapper, MachineService machineService) {
+	public ConsumableServiceImpl(ConsumableRepository consumableRepository,  ModelMapper modelMapper, MachineService machineService) {
 		super();
-		this.accessoryRepository = accessoryRepository;
+		this.consumableRepository = consumableRepository;
 		this.modelMapper = modelMapper;
 		this.machineService =  machineService;
 	}
 
 
 	/* (non-Javadoc)
-	 * @see machine.services.AccessoryService#addAccessory(machine.dto.AccessoryDto)
+	 * @see machine.services.ConsumableService#addConsumable(machine.dto.ConsumableDto)
 	 */
 	@Override
-	public boolean addAccessory(ConsumableDto accessoryDto) {
+	public boolean addConsumable(ConsumableDto consumableDto) {
 		
-		if(isConsumableExist(accessoryDto.getName())) {
-			Consumable temp = this.accessoryRepository.findByName(accessoryDto.getName());
-			List<Machine> machinsToBeAdd = accessoryDto
+		if(isConsumableExist(consumableDto.getName())) {
+			Consumable temp = this.consumableRepository.findByName(consumableDto.getName());
+			List<Machine> machinsToBeAdd = consumableDto
 					.getMachines()
 					.stream()
 					.filter(m -> temp.getMachines().stream()
 							.noneMatch(m1 -> m.getModel().equals(m1.getModel()))).collect(Collectors.toList());
 			if(machinsToBeAdd.size() > 0) {
 				temp.getMachines().addAll(machinsToBeAdd);
-				this.accessoryRepository.save(temp);
-				accessoryDto.getMachines().clear();
-				accessoryDto.setMachines(machinsToBeAdd);
+				this.consumableRepository.save(temp);
+				consumableDto.getMachines().clear();
+				consumableDto.setMachines(machinsToBeAdd);
 				return true;
 			}
 			return false;
 		}
-		Consumable accessory = modelMapper.map(accessoryDto, Consumable.class);
-		this.accessoryRepository.save(accessory);
-//		accessory.setMachines(accessory
+		Consumable consumable = modelMapper.map(consumableDto, Consumable.class);
+		this.consumableRepository.save(consumable);
+//		consumable.setMachines(consumable
 //				.getMachines()
 //				.stream()
 //				.filter(m -> m.getConsumables()
 //						.stream()
-//						.noneMatch(c-> c.getAccessoryType().equals(accessory.getAccessoryType()))).collect(Collectors.toList()));
+//						.noneMatch(c-> c.getConsumableType().equals(consumable.getConsumableType()))).collect(Collectors.toList()));
 		
-//		if(accessory.getMachines().size() > 0) {
-//			this.accessoryRepository.save(accessory);
-//			accessoryDto.getMachines().clear();
-//			accessoryDto.setMachines(accessory.getMachines());
+//		if(consumable.getMachines().size() > 0) {
+//			this.consumableRepository.save(consumable);
+//			consumableDto.getMachines().clear();
+//			consumableDto.setMachines(consumable.getMachines());
 			return true;
 //		}		
 //		return false;
@@ -75,28 +75,28 @@ public class ConsumableServiceImpl implements ConsumableService{
 
 
 	@Override
-	public Consumable findByType(AccessoryType type) {
+	public Consumable findByType(ConsumableType type) {
 		
-		return this.accessoryRepository.findByAccessoryType(type);
+		return this.consumableRepository.findByConsumableType(type);
 	}
 
 
 	@Override
-	public Consumable findByMachineAndType(Long machineId, AccessoryType type) {
+	public Consumable findByMachineAndType(Long machineId, ConsumableType type) {
 		
-		return this.accessoryRepository.findByTypeAndMachine(machineId, type);
+		return this.consumableRepository.findByTypeAndMachine(machineId, type);
 	}
 	
 	
 
 //	@Override
-//	public List<Accessory> findAllByModel(Machine machine) {
-//		this.accessoryRepository.findAllByMachines(machine);
+//	public List<Consumable> findAllByModel(Machine machine) {
+//		this.consumableRepository.findAllByMachines(machine);
 //		return null;
 //	}
 	
 	private boolean isConsumableExist(String name) {
-		if(this.accessoryRepository.findByName(name) != null) {
+		if(this.consumableRepository.findByName(name) != null) {
 			return true;
 		}
 		return false;

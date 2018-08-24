@@ -18,7 +18,7 @@
 				<label for="consumables" class="col-sm-2 col-form-label">Consumables</label>
 				<div class="col-sm-4">
 				 	<select th:multiple="true" class="form-control" id="consumables" name="consumables" th:field="*{consumables}">
-						<option th:each="consumable : ${allConsumables}" th:value="${{consumable}}" th:text="${consumable.getAccessoryType().name()} + ' - ' + ${consumable.name}">Model</option>
+						<option th:each="consumable : ${allConsumables}" th:value="${{consumable}}" th:text="${consumable.getConsumableType().name()} + ' - ' + ${consumable.name}">Model</option>
 					</select>
 				 	<small id="capHelp" class="form-control-feedback" th:each="error : ${#fields.errors('consumables')}" th:text="${error}">Error Message</small>
 				</div>

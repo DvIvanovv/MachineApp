@@ -7,22 +7,22 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 import machine.data.entities.machines.Machine;
-import machine.data.enums.AccessoryType;
+import machine.data.enums.ConsumableType;
 
 @Entity   
-@Table(name="accessories")
+@Table(name="consumables")
 public class Consumable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "accessory_type")
-	private AccessoryType accessoryType;
+	@Column(name = "consumable_type")
+	private ConsumableType consumableType;
 	@NotBlank
 	private String name;
 	@ManyToMany(cascade = CascadeType.PERSIST,fetch=FetchType.EAGER)
-	@JoinTable(name = "accessory_machine")
+	@JoinTable(name = "consumable_machine")
 	private List<Machine> machines;
 
 
@@ -44,16 +44,16 @@ public class Consumable {
 		this.id = id;
 	}
 	/**
-	 * @return the accessoryType
+	 * @return the consumableType
 	 */
-	public AccessoryType getAccessoryType() {
-		return accessoryType;
+	public ConsumableType getConsumableType() {
+		return consumableType;
 	}
 	/**
-	 * @param accessoryType the accessoryType to set
+	 * @param consumableType the consumableType to set
 	 */
-	public void setAccessoryType(AccessoryType accessoryType) {
-		this.accessoryType = accessoryType;
+	public void setConsumableType(ConsumableType consumableType) {
+		this.consumableType = consumableType;
 	}
 	/**
 	 * @return the machines

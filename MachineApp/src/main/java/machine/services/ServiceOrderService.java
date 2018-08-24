@@ -12,4 +12,6 @@ public interface ServiceOrderService {
 	void addServiceOrder(ServiceOrderDto serviceOrderDto);
 
 	List<ServiceOrderDto> getAllServiceOrdersByUser(String username);
+	
+	List<ServiceOrderDto> getAllServiceOrders() ;
 }

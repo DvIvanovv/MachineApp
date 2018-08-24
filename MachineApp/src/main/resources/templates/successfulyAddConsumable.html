@@ -8,7 +8,7 @@
 	<div class="container main-content">
        	<div style="margin-top:50px;">	
        	<div th:if="${isAdded}">
-       		<p  th:each="machine: ${consumable.machines}" th:text="'Succsessfuly added consumable ' +  ${consumable.accessoryType} + ' for machine ' + ${machine.model}"></p>
+       		<p  th:each="machine: ${consumable.machines}" th:text="'Succsessfuly added consumable ' +  ${consumable.consumableType} + ' for machine ' + ${machine.model}"></p>
        	</div>													
         <div th:unless="${isAdded}">
         	<p>"There is such consumable for this machine."</p>

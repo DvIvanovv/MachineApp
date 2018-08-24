@@ -17,46 +17,46 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import machine.data.entities.machines.Machine;
-import machine.data.enums.AccessoryType;
+import machine.data.enums.ConsumableType;
 import machine.dto.ConsumableDto;
 import machine.dto.MachineDto;
 import machine.services.ConsumableService;
 import machine.services.MachineService;
 
 @Controller
-@RequestMapping("/accessories")
+@RequestMapping("/consumables")
 public class ConsumableController 	{
 		
-	private ConsumableService accessoryService;
+	private ConsumableService consumableService;
 	private MachineService machineService;
 
 	
 	@Autowired
-	public ConsumableController(ConsumableService accessoryService, MachineService machineService) {
+	public ConsumableController(ConsumableService consumableService, MachineService machineService) {
 		super();
-		this.accessoryService = accessoryService;
+		this.consumableService = consumableService;
 		this.machineService = machineService;
 	}
 	
 	@GetMapping("/add")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
-	public String getAddAccessoryForm(Model model) {
-		ConsumableDto accessory = new ConsumableDto();
-		model.addAttribute("accessory",  accessory);
-		return "addAccessory";
+	public String getAddConsumableForm(Model model) {
+		ConsumableDto consumable = new ConsumableDto();
+		model.addAttribute("consumable",  consumable);
+		return "addConsumable";
 	}
 	
 	@PostMapping("/add")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
-	public String addAccessory(@Valid @ModelAttribute("accessory") ConsumableDto accessory, BindingResult bindingResult, Model model) {
+	public String addConsumable(@Valid @ModelAttribute("consumable") ConsumableDto consumable, BindingResult bindingResult, Model model) {
 		if(bindingResult.hasErrors()) {
-			model.addAttribute("accessory", accessory);
-			return "addAccessory";
+			model.addAttribute("consumable", consumable);
+			return "addConsumable";
 		}
-		boolean isAdded = this.accessoryService.addAccessory(accessory);
-		model.addAttribute("consumable", accessory);
+		boolean isAdded = this.consumableService.addConsumable(consumable);
+		model.addAttribute("consumable", consumable);
 		model.addAttribute("isAdded", isAdded);
-		return "successfulyAddConsumable"; //TODO go to accessory list instead of index
+		return "successfulyAddConsumable"; //TODO go to consumable list instead of index
 	}
 	
 	
@@ -73,10 +73,10 @@ public class ConsumableController 	{
 		return machines;
 	}
 	
-	@ModelAttribute("accessoryTypes")
-	public List<AccessoryType> accessoryTypes() {
-		List<AccessoryType> accessoryTypes=new ArrayList<>();
-		accessoryTypes.addAll(Arrays.asList(AccessoryType.values()));
-		return accessoryTypes;
+	@ModelAttribute("consumableTypes")
+	public List<ConsumableType> consumableTypes() {
+		List<ConsumableType> consumableTypes=new ArrayList<>();
+		consumableTypes.addAll(Arrays.asList(ConsumableType.values()));
+		return consumableTypes;
 	}
 }

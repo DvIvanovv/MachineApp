@@ -6,7 +6,7 @@
 <body>
 	<header th:replace="fragments/navBarFragment :: header"></header>
 	<div class="container">
-		<h1>My service orders:</h1>
+		<h1> Service orders:</h1>
 		
 		<div class="row justify-content-around" >
 		 <th:block th:each="serviceOrder : ${allServiceOrders}">
@@ -18,7 +18,7 @@
 					<li class="list-group-item" th:text="'Service date ' + ${#dates.format(serviceOrder.serviceDate, 'dd-MM-yyyy')}"></li> 
 				</ul>
 				<th:block th:each="consumable : ${serviceOrder.getConsumables()}">
-				<p class="list-group-item" th:text="${consumable.getAccessoryType().name()} + ' - ' + ${consumable.name}"></p>
+				<p class="list-group-item" th:text="${consumable.getConsumableType().name()} + ' - ' + ${consumable.name}"></p>
 			</div>
 		</th:block>	
 	   </div>
